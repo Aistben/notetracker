@@ -70,7 +70,6 @@ button { cursor: pointer; border: none; background: none; }
 }
 
 /* ── Обои: стеклянный эффект на элементах ────────── */
-/* ── Обои: прозрачные элементы без blur ──────────── */
 .has-wallpaper .header {
   background: rgba(10, 10, 20, 0.55);
   backdrop-filter: blur(12px);
@@ -79,11 +78,13 @@ button { cursor: pointer; border: none; background: none; }
 .has-wallpaper .exercise-card {
   background: rgba(14, 14, 28, 0.40);
   box-shadow: none;
+  background: rgb(0 0 0 / 71%);
 }
 
 .has-wallpaper .day-tile {
   background: rgba(14, 14, 28, 0.35);
   box-shadow: none;
+  background: rgb(0 0 0 / 71%);
 }
 
 .has-wallpaper .day-tile.active {
