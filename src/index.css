@@ -73,6 +73,7 @@ button { cursor: pointer; border: none; background: none; }
 /* ── Обои: прозрачные элементы без blur ──────────── */
 .has-wallpaper .header {
   background: rgba(10, 10, 20, 0.55);
+  backdrop-filter: blur(12px);
 }
 
 .has-wallpaper .exercise-card {
