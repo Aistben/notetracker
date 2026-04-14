@@ -162,7 +162,6 @@ button { cursor: pointer; border: none; background: none; }
    МОБИЛЬНАЯ АДАПТАЦИЯ
    ════════════════════════════════════════════ */
 @media (max-width: 430px) {
-  .main { padding: 10px 8px calc(54px + env(safe-area-inset-bottom, 0px)); }
   .exercise-card { padding: 11px 10px; }
   .input-stepper { height: 34px; }
   .stepper-btn { width: 26px; min-width: 20px; font-size: 15px; }
