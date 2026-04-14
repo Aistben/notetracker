@@ -130,13 +130,7 @@ button { cursor: pointer; border: none; background: none; }
   background: rgba(20, 20, 40, 0.35);
 }
 
-/* Все дочерние элементы поверх обоев */
-.app > header,
-.app > main,
-.app > nav {
-  position: relative;
-  z-index: 1;
-}
+
 
 @keyframes errorShake {
   0%,100% { transform: translateX(0); }
