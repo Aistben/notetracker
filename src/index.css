@@ -168,7 +168,7 @@ button { cursor: pointer; border: none; background: none; }
    МОБИЛЬНАЯ АДАПТАЦИЯ
    ════════════════════════════════════════════ */
 @media (max-width: 430px) {
-  .main { padding: 10px 8px 88px; }
+  .main { padding: 10px 8px calc(54px + env(safe-area-inset-bottom, 0px)); }
   .exercise-card { padding: 11px 10px; }
   .input-stepper { height: 34px; }
   .stepper-btn { width: 26px; min-width: 20px; font-size: 15px; }
@@ -186,7 +186,7 @@ button { cursor: pointer; border: none; background: none; }
   .header { padding: 13px 10px 9px; }
   .header-title { font-size: 17px; }
   .header-time { font-size: 15px; }
-  .main { padding: 8px 6px 86px; }
+  .main { padding: 8px 6px calc(52px + env(safe-area-inset-bottom, 0px)); }
   .day-tiles { gap: 5px; }
   .day-tile { padding: 26px 4px 7px; min-height: 66px; }
   .day-tile-label { font-size: 13px; }
