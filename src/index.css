@@ -1,0 +1,212 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface-alt: #1a1a2e;
+  --primary: #00d4e8;
+  --primary-dark: #0099aa;
+  --text: #e8e8f0;
+  --text-sec: #7a7a9a;
+  --accent: #cc005a;
+  --border: #22223a;
+  --card-bg: #14142a;
+  --input-bg: #1c1c30;
+  --shadow: rgba(0, 212, 232, 0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.22s ease;
+}
+
+html, body, #root {
+  height: 100%;
+  min-height: 100%;
+}
+
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#root { display: flex; flex-direction: column; }
+input, textarea, select, button { font-family: inherit; font-size: inherit; color: inherit; }
+button { cursor: pointer; border: none; background: none; }
+
+.wallpaper-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Обои: стеклянный эффект на элементах ────────── */
+.has-wallpaper .header {
+  background: rgba(10, 10, 20, 0.55);
+  backdrop-filter: blur(12px);
+}
+
+.has-wallpaper .exercise-card {
+  background: rgba(14, 14, 28, 0.40);
+  box-shadow: none;
+  background: rgb(0 0 0 / 71%);
+}
+
+.has-wallpaper .day-tile {
+  background: rgba(14, 14, 28, 0.35);
+  box-shadow: none;
+  background: rgb(0 0 0 / 71%);
+}
+
+.has-wallpaper .day-tile.active {
+  background: rgba(26, 26, 46, 0.50);
+  box-shadow: none;
+}
+
+.has-wallpaper .bottom-nav {
+  background: rgba(10, 10, 20, 0.60);
+}
+
+.has-wallpaper .settings-section {
+  background: rgba(14, 14, 28, 0.35);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.has-wallpaper .settings-action-btn {
+  background: rgba(20, 20, 40, 0.35);
+}
+
+.has-wallpaper .theme-btn {
+  background: rgba(20, 20, 40, 0.30) !important;
+}
+
+.has-wallpaper .ex-edit-form {
+  background: rgba(20, 20, 40, 0.45);
+}
+
+.has-wallpaper .ex-history {
+  background: rgba(10, 10, 20, 0.40);
+}
+
+.has-wallpaper .input-stepper {
+  background: rgba(20, 20, 40, 0.35);
+}
+
+.has-wallpaper .ex-note {
+  background: rgba(20, 20, 40, 0.35);
+}
+
+.has-wallpaper .toggle-btn {
+  background: rgba(20, 20, 40, 0.30);
+}
+
+.has-wallpaper .ex-last {
+  background: rgba(20, 20, 40, 0.30);
+}
+
+.has-wallpaper .add-ex-btn {
+  background: rgba(20, 20, 40, 0.20);
+}
+
+.has-wallpaper .finish-btn {
+  opacity: 0.9;
+}
+
+.has-wallpaper .modal {
+  background: rgba(14, 14, 28, 0.85);
+}
+
+.has-wallpaper .wp-opacity-row {
+  background: rgba(20, 20, 40, 0.35);
+}
+
+/* Все дочерние элементы поверх обоев */
+.app > header,
+.app > main,
+.app > nav {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes errorShake {
+  0%,100% { transform: translateX(0); }
+  20%     { transform: translateX(-6px); }
+  40%     { transform: translateX(6px); }
+  60%     { transform: translateX(-4px); }
+  80%     { transform: translateX(4px); }
+}
+
+@keyframes cycleAppear {
+  0%   { opacity: 0; transform: scale(0.92) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; pointer-events: none; } }
+@keyframes popIn {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.18); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-sec); }
+
+/* ════════════════════════════════════════════
+   МОБИЛЬНАЯ АДАПТАЦИЯ
+   ════════════════════════════════════════════ */
+@media (max-width: 430px) {
+  .main { padding: 10px 8px 88px; }
+  .exercise-card { padding: 11px 10px; }
+  .input-stepper { height: 34px; }
+  .stepper-btn { width: 26px; min-width: 20px; font-size: 15px; }
+  .stepper-input { font-size: 13px; }
+  .input-label { font-size: 9px; }
+  .ex-inputs { gap: 5px; }
+  .add-ex-btn { padding: 12px; font-size: 13px; }
+  .finish-btn, .cycle-btn { padding: 14px; font-size: 14px; }
+  .modal { padding: 18px; }
+  .modal-wide { max-width: 100%; }
+  .modal-steppers { gap: 6px; }
+}
+
+@media (max-width: 375px) {
+  .header { padding: 13px 10px 9px; }
+  .header-title { font-size: 17px; }
+  .header-time { font-size: 15px; }
+  .main { padding: 8px 6px 86px; }
+  .day-tiles { gap: 5px; }
+  .day-tile { padding: 26px 4px 7px; min-height: 66px; }
+  .day-tile-label { font-size: 13px; }
+  .day-tile-pencil { font-size: 12px; top: 4px; right: 4px; width: 20px; height: 20px; }
+  .exercise-card { padding: 10px 9px; }
+  .ex-name { font-size: 14px; }
+  .ex-action-btn { width: 27px; height: 27px; font-size: 13px; }
+  .ex-actions { gap: 3px; }
+  .ex-inputs { gap: 4px; }
+  .input-stepper { height: 32px; }
+  .stepper-btn { width: 22px; min-width: 18px; font-size: 14px; }
+  .stepper-input { font-size: 12px; }
+  .input-label { font-size: 8px; letter-spacing: 0; }
+  .add-ex-btn { padding: 11px; font-size: 13px; margin-top: 10px; }
+  .finish-btn, .cycle-btn { padding: 13px; font-size: 14px; margin-top: 8px; }
+  .modal { padding: 16px; }
+  .modal-title { font-size: 15px; }
+  .modal-steppers { gap: 5px; }
+  .modal-btn { padding: 10px; font-size: 12px; }
+  .theme-grid { gap: 6px; }
+  .theme-btn { padding: 9px 10px; font-size: 12px; }
+}
+::selection { background: var(--primary); color: var(--bg); }

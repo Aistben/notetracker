@@ -1,0 +1,25 @@
+{
+  "name": "Трекер тренировок",
+  "short_name": "Workout",
+  "description": "Трекер тренировок (офлайн)",
+  "lang": "ru",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#00d4e8",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
