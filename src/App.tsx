@@ -1,4 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type ChangeEvent } from 'react'
+import { useSwipeable } from 'react-swipeable'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
 import DayTabs from './components/DayTabs'
 import ExerciseCard from './components/ExerciseCard'
 import Modals from './components/Modals'
@@ -59,6 +62,9 @@ export default function App() {
   const wallpaperRef    = useRef<HTMLInputElement>(null)
   const manualDayOverrideRef = useRef(false)
   const didAutoAdvanceRef = useRef<string | null>(null)
+
+  // Ref для Swiper
+  const swiperRef = useRef<any>(null)
 
   useEffect(() => { const t = setInterval(() => setNow(new Date()), 1000); return () => clearInterval(t) }, [])
   const currentDay = days[activeDay]
@@ -173,6 +179,12 @@ export default function App() {
 
   const todayStr = new Date().toLocaleDateString('ru-RU')
 
+  const handleSlideChangeTransitionEnd = () => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.updateAutoHeight()
+    }
+  }
+
   const finishWorkout = () => {
     const day = days[activeDay]
     const hasData = day.exercises.some(ex => ex.weight > 0 || ex.sets > 0 || ex.reps > 0)
@@ -265,7 +277,6 @@ export default function App() {
       )}
 
       <div className={`app ${wallpaper ? 'has-wallpaper' : ''}`}>
-
         <header className="header">
           <h1 className="header-title">
             {tab === 'settings' ? '⚙️ Настройки' : '🏋️ Трекер тренировок'}
@@ -285,57 +296,81 @@ export default function App() {
                 onEditDay={openEditDayModal}
               />
 
-              <div className="exercises-list">
-                {(currentDay?.exercises ?? []).map((ex, ei) => {
-                  const isEditing = editingExercise?.dayIdx === activeDay && editingExercise?.exIdx === ei
-                  const lastEntry = getLastEntry(ex.name, currentDay.key)
-                  const histEntries = getExerciseHistory(ex.name, currentDay.key)
-                  const dayCompleted = isDayCompleted(currentDay.key)
-                  return (
-                    <ExerciseCard
-                      key={ex.id}
-                      ex={ex}
-                      exIdx={ei}
-                      activeDay={activeDay}
-                      dragIdx={dragIdx}
-                      isEditing={isEditing}
-                      editForm={editForm}
-                      lastEntry={lastEntry}
-                      histEntries={histEntries}
-                      dayCompleted={dayCompleted}
-                      onDragStart={handleDragStart}
-                      onDragEnd={handleDragEnd}
-                      onDrop={handleDrop}
-                      onSaveEdit={saveEditExercise}
-                      onStartEdit={startEditExercise}
-                      onRequestDelete={(dayIdx, exIdx) => setDeleteModal({ dayIdx, exIdx })}
-                      onEditFormChange={(patch) => setEditForm((f) => ({ ...f, ...patch }))}
-                      onAdjustValue={adjustValue}
-                      onFieldInput={handleFieldInput}
-                      onUpdateExercise={updateExercise}
-                      onRemoveHistoryEntry={removeHistoryEntry}
-                    />
-                  )
-                })}
-              </div>
+             <Swiper
+  ref={swiperRef}
+  spaceBetween={16}
+  slidesPerView={1}
+  onSlideChange={(swiper) => setActiveDay(swiper.activeIndex)}
+  onSlideChangeTransitionStart={() => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.updateAutoHeight()
+    }
+  }}
+  onSlideChangeTransitionEnd={() => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.updateAutoHeight()
+    }
+  }}
+  initialSlide={activeDay}
+  speed={400}
+  style={{ width: '100%', overflow: 'hidden' }}
+>
+  {days.map((day) => (
+    <SwiperSlide key={day.key} style={{ height: '100%', overflowY: 'auto' }}>
+      <div className="exercises-list">
+        {day.exercises.map((ex, ei) => {
+          const isEditing = editingExercise?.dayIdx === activeDay && editingExercise?.exIdx === ei
+          const lastEntry = getLastEntry(ex.name, day.key)
+          const histEntries = getExerciseHistory(ex.name, day.key)
+          const dayCompleted = isDayCompleted(day.key)
+          return (
+            <ExerciseCard
+              key={ex.id}
+              ex={ex}
+              exIdx={ei}
+              activeDay={activeDay}
+              dragIdx={dragIdx}
+              isEditing={isEditing}
+              editForm={editForm}
+              lastEntry={lastEntry}
+              histEntries={histEntries}
+              dayCompleted={dayCompleted}
+              onDragStart={handleDragStart}
+              onDragEnd={handleDragEnd}
+              onDrop={handleDrop}
+              onSaveEdit={saveEditExercise}
+              onStartEdit={startEditExercise}
+              onRequestDelete={(dayIdx, exIdx) => setDeleteModal({ dayIdx, exIdx })}
+              onEditFormChange={(patch) => setEditForm((f) => ({ ...f, ...patch }))}
+              onAdjustValue={adjustValue}
+              onFieldInput={handleFieldInput}
+              onUpdateExercise={updateExercise}
+              onRemoveHistoryEntry={removeHistoryEntry}
+            />
+          )
+        })}
+      </div>
 
-              <button className="add-ex-btn" onClick={() => { setNewEx(EMPTY_NEW_EX); setAddExModal(true) }}>
-                + Добавить упражнение
-              </button>
+      <button className="add-ex-btn" onClick={() => { setNewEx(EMPTY_NEW_EX); setAddExModal(true) }}>
+        + Добавить упражнение
+      </button>
 
-              {finishError && (
-                <div className="finish-error">⚠️ Введите данные хотя бы в одном упражнении</div>
-              )}
+      {finishError && (
+        <div className="finish-error">⚠️ Введите данные хотя бы в одном упражнении</div>
+      )}
 
-              <button
-                className={`finish-btn ${isDayCompleted(currentDay.key) ? 'finished' : ''} ${finishError ? 'error-shake' : ''}`}
-                onClick={finishWorkout}>
-                🏁 Завершить тренировку
-              </button>
+      <button
+        className={`finish-btn ${isDayCompleted(day.key) ? 'finished' : ''} ${finishError ? 'error-shake' : ''}`}
+        onClick={finishWorkout}>
+        🏁 Завершить тренировку
+      </button>
 
-              {allDaysCompleted && (
-                <button className="cycle-btn" onClick={() => setCycleModal(true)}>🔁 Следующий цикл</button>
-              )}
+      {allDaysCompleted && (
+        <button className="cycle-btn" onClick={() => setCycleModal(true)}>🔁 Следующий цикл</button>
+      )}
+    </SwiperSlide>
+  ))}
+</Swiper>
             </>
           )}
 
@@ -402,7 +437,6 @@ export default function App() {
           onCloseReset={() => setResetModal(false)}
           onResetAll={resetAll}
         />
-
       </div>
     </>
   )
