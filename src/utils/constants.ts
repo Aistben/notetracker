@@ -40,8 +40,8 @@ export interface HistoryEntry {
 
 export interface NewExerciseForm {
   name: string
-  type: ExerciseType
-  intensity: Intensity
+  type: ExerciseType | null
+  intensity: Intensity | null
   weight: number
   sets: number
   reps: number

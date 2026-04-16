@@ -1,6 +1,49 @@
 import type { Dispatch, SetStateAction } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { DayConfig, NewExerciseForm, ExerciseType, Intensity } from '../utils/constants'
+import { intensityBg, intensityColor } from '../utils/helpers'
 import './Modals.css'
+
+interface BadgeSelectProps {
+  value: string | null
+  options: { value: string; label: string; color: string; bg: string; borderColor: string }[]
+  onChange: (value: string) => void
+}
+
+function BadgeSelect({ value, options, onChange }: BadgeSelectProps) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [])
+
+  const selected = value ? options.find(o => o.value === value) : null
+
+  return (
+    <div ref={ref} className="modal-badge-select">
+      <button className="modal-badge-selected" onClick={() => setOpen(!open)} style={{ color: 'var(--text)', background: 'var(--input-bg)', borderColor: 'var(--border)' }}>
+        {selected?.label || ''}
+      </button>
+      {open && (
+        <div className="modal-badge-dropdown">
+          {options.map(opt => (
+            <button
+              key={opt.value}
+              className={`modal-badge-option ${value === opt.value ? 'active' : ''}`}
+              style={{ color: opt.color, background: opt.bg, borderColor: opt.borderColor }}
+              onClick={() => { onChange(opt.value); setOpen(false) }}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 interface ModalsProps {
   days: DayConfig[]
@@ -95,26 +138,26 @@ export default function Modals({
               <div className="modal-row2">
                 <div className="modal-field half">
                   <label className="modal-label">Приоритет</label>
-                  <select
-                    className="modal-select"
+                  <BadgeSelect
                     value={newEx.type}
-                    onChange={(e) => onSetNewEx((f) => ({ ...f, type: e.target.value as ExerciseType }))}
-                  >
-                    <option value="основа">основа</option>
-                    <option value="подсобка">подсобка</option>
-                  </select>
+                    onChange={(val) => onSetNewEx((f) => ({ ...f, type: val as ExerciseType }))}
+                    options={[
+                      { value: 'основа', label: 'основа', color: '#e05555', bg: 'rgba(224,85,85,0.10)', borderColor: 'rgba(224,85,85,0.30)' },
+                      { value: 'подсобка', label: 'подсобка', color: '#8090a8', bg: 'rgba(128,144,168,0.08)', borderColor: 'rgba(128,144,168,0.22)' }
+                    ]}
+                  />
                 </div>
                 <div className="modal-field half">
                   <label className="modal-label">Интенсивность</label>
-                  <select
-                    className="modal-select"
+                  <BadgeSelect
                     value={newEx.intensity}
-                    onChange={(e) => onSetNewEx((f) => ({ ...f, intensity: e.target.value as Intensity }))}
-                  >
-                    <option value="тяжёлая">тяжёлая</option>
-                    <option value="средняя">средняя</option>
-                    <option value="лёгкая">лёгкая</option>
-                  </select>
+                    onChange={(val) => onSetNewEx((f) => ({ ...f, intensity: val as Intensity }))}
+                    options={[
+                      { value: 'тяжёлая', label: 'тяжёлая', color: '#e05555', bg: 'rgba(224,85,85,0.12)', borderColor: 'rgba(224,85,85,0.30)' },
+                      { value: 'средняя', label: 'средняя', color: '#c8a840', bg: 'rgba(200,168,64,0.12)', borderColor: 'rgba(200,168,64,0.30)' },
+                      { value: 'лёгкая', label: 'лёгкая', color: '#48a870', bg: 'rgba(72,168,112,0.12)', borderColor: 'rgba(72,168,112,0.30)' }
+                    ]}
+                  />
                 </div>
               </div>
               <div className="modal-steppers">

@@ -56,8 +56,8 @@ export const DEFAULT_DAYS = (): DayConfig[] => [
 
 export const EMPTY_NEW_EX: NewExerciseForm = {
   name: '',
-  type: 'подсобка',
-  intensity: 'средняя',
+  type: null,
+  intensity: null,
   weight: 0,
   sets: 3,
   reps: 10

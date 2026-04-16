@@ -41,7 +41,7 @@ export default function App() {
   const [activeDay, setActiveDay] = useLocalStorage<number>('workout_active_day', 0)
   const [tab, setTab] = useLocalStorage<TabName>('workout_tab', 'tracker')
   const [showFinishAnim, setShowFinishAnim] = useState(false)
-  const [finishError,    setFinishError]    = useState(false)
+  const [finishError, setFinishError] = useState(false)
 
   const [deleteModal,  setDeleteModal]  = useState<{ dayIdx: number; exIdx: number } | null>(null)
   const [resetModal,   setResetModal]   = useState(false)
@@ -65,6 +65,12 @@ export default function App() {
 
   // Ref для Swiper
   const swiperRef = useRef<any>(null)
+
+  useEffect(() => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.slideTo(activeDay, 0)
+    }
+  }, [activeDay])
 
   useEffect(() => { const t = setInterval(() => setNow(new Date()), 1000); return () => clearInterval(t) }, [])
   const currentDay = days[activeDay]
@@ -278,11 +284,15 @@ export default function App() {
 
       <div className={`app ${wallpaper ? 'has-wallpaper' : ''}`}>
         <header className="header">
-          <h1 className="header-title">
-            {tab === 'settings' ? '⚙️ Настройки' : '🏋️ Трекер тренировок'}
-          </h1>
-          <div className="header-date">{formatDate(now)}</div>
-          <div className="header-time">{formatTime(now)}</div>
+          {tab === 'settings' ? (
+            <button className="back-btn" onClick={() => setTab('tracker')}>
+              ←
+            </button>
+          ) : (
+            <button className="settings-btn" onClick={() => setTab('settings')}>
+              ⚙️
+            </button>
+          )}
         </header>
 
         <main className="main">
@@ -341,6 +351,7 @@ export default function App() {
               onSaveEdit={saveEditExercise}
               onStartEdit={startEditExercise}
               onRequestDelete={(dayIdx, exIdx) => setDeleteModal({ dayIdx, exIdx })}
+              onAddExercise={() => { setNewEx(EMPTY_NEW_EX); setAddExModal(true) }}
               onEditFormChange={(patch) => setEditForm((f) => ({ ...f, ...patch }))}
               onAdjustValue={adjustValue}
               onFieldInput={handleFieldInput}
@@ -350,10 +361,6 @@ export default function App() {
           )
         })}
       </div>
-
-      <button className="add-ex-btn" onClick={() => { setNewEx(EMPTY_NEW_EX); setAddExModal(true) }}>
-        + Добавить упражнение
-      </button>
 
       {finishError && (
         <div className="finish-error">⚠️ Введите данные хотя бы в одном упражнении</div>
@@ -392,17 +399,6 @@ export default function App() {
             />
           )}
         </main>
-
-        <nav className="bottom-nav">
-          <button className={`nav-btn ${tab === 'tracker' ? 'active' : ''}`} onClick={() => setTab('tracker')}>
-            <span className="nav-icon">🏋️</span>
-            <span className="nav-label">Tracker</span>
-          </button>
-          <button className={`nav-btn ${tab === 'settings' ? 'active' : ''}`} onClick={() => setTab('settings')}>
-            <span className="nav-icon">⚙️</span>
-            <span className="nav-label">Настройки</span>
-          </button>
-        </nav>
 
         {showFinishAnim && (
           <div className="finish-overlay">

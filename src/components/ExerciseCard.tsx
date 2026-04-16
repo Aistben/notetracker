@@ -1,6 +1,48 @@
 import { Exercise, ExerciseType, HistoryEntry, Intensity } from '../utils/constants'
 import { intensityBg, intensityColor } from '../utils/helpers'
 import './ExerciseCard.css'
+import { useState, useEffect, useRef } from 'react'
+
+interface BadgeSelectProps {
+  value: string
+  options: { value: string; label: string; color: string; bg: string; borderColor: string }[]
+  onChange: (value: string) => void
+}
+
+function BadgeSelect({ value, options, onChange }: BadgeSelectProps) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [])
+
+  const selected = options.find(o => o.value === value)
+
+  return (
+    <div ref={ref} className="ex-badge-select">
+      <button className="ex-badge-selected" onClick={() => setOpen(!open)}>
+        {selected?.label}
+      </button>
+      {open && (
+        <div className="ex-badge-dropdown">
+          {options.map(opt => (
+            <button
+              key={opt.value}
+              className={`ex-badge-option ${value === opt.value ? 'active' : ''}`}
+              style={{ color: opt.color, background: opt.bg, borderColor: opt.borderColor }}
+              onClick={() => { onChange(opt.value); setOpen(false) }}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 interface ExerciseCardProps {
   ex: Exercise
@@ -18,6 +60,7 @@ interface ExerciseCardProps {
   onSaveEdit: () => void
   onStartEdit: (dayIdx: number, exIdx: number) => void
   onRequestDelete: (dayIdx: number, exIdx: number) => void
+  onAddExercise: () => void
   onEditFormChange: (patch: Partial<{ name: string; type: ExerciseType; intensity: Intensity }>) => void
   onAdjustValue: (dayIdx: number, exIdx: number, field: 'weight' | 'sets' | 'reps', delta: number) => void
   onFieldInput: (dayIdx: number, exIdx: number, field: 'weight' | 'sets' | 'reps', raw: string) => void
@@ -41,6 +84,7 @@ export default function ExerciseCard({
   onSaveEdit,
   onStartEdit,
   onRequestDelete,
+  onAddExercise,
   onEditFormChange,
   onAdjustValue,
   onFieldInput,
@@ -64,7 +108,7 @@ export default function ExerciseCard({
           ) : (
             <button className="ex-action-btn pencil" onClick={() => onStartEdit(activeDay, exIdx)}>✎</button>
           )}
-          <span className="ex-action-btn move">⇅</span>
+          <button className="ex-action-btn add" onClick={onAddExercise}>+</button>
           <button className="ex-action-btn del" onClick={() => onRequestDelete(activeDay, exIdx)}>✕</button>
         </div>
       </div>
@@ -84,26 +128,26 @@ export default function ExerciseCard({
           <div className="ex-edit-row2">
             <div className="ex-edit-field half">
               <label className="ex-edit-label">Приоритет</label>
-              <select
-                className="ex-edit-select"
+              <BadgeSelect
                 value={editForm.type}
-                onChange={(e) => onEditFormChange({ type: e.target.value as ExerciseType })}
-              >
-                <option value="основа">основа</option>
-                <option value="подсобка">подсобка</option>
-              </select>
+                onChange={(val) => onEditFormChange({ type: val as ExerciseType })}
+                options={[
+                  { value: 'основа', label: 'основа', color: '#e05555', bg: 'rgba(224,85,85,0.10)', borderColor: 'rgba(224,85,85,0.30)' },
+                  { value: 'подсобка', label: 'подсобка', color: '#8090a8', bg: 'rgba(128,144,168,0.08)', borderColor: 'rgba(128,144,168,0.22)' }
+                ]}
+              />
             </div>
             <div className="ex-edit-field half">
               <label className="ex-edit-label">Интенсивность</label>
-              <select
-                className="ex-edit-select"
+              <BadgeSelect
                 value={editForm.intensity}
-                onChange={(e) => onEditFormChange({ intensity: e.target.value as Intensity })}
-              >
-                <option value="тяжёлая">тяжёлая</option>
-                <option value="средняя">средняя</option>
-                <option value="лёгкая">лёгкая</option>
-              </select>
+                onChange={(val) => onEditFormChange({ intensity: val as Intensity })}
+                options={[
+                  { value: 'тяжёлая', label: 'тяжёлая', color: '#e05555', bg: 'rgba(224,85,85,0.12)', borderColor: 'rgba(224,85,85,0.30)' },
+                  { value: 'средняя', label: 'средняя', color: '#c8a840', bg: 'rgba(200,168,64,0.12)', borderColor: 'rgba(200,168,64,0.30)' },
+                  { value: 'лёгкая', label: 'лёгкая', color: '#48a870', bg: 'rgba(72,168,112,0.12)', borderColor: 'rgba(72,168,112,0.30)' }
+                ]}
+              />
             </div>
           </div>
         </div>
