@@ -43,23 +43,23 @@
 
 .day-tile-pencil {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 16px;
+  top: 6px;
+  right: 6px;
+  font-size: 14px;
   color: var(--primary);
   opacity: 0.8;
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 6px;
   transition: all var(--transition);
   z-index: 2;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: 28px;
+  min-height: 28px;
 }
 
 .day-tile-pencil:hover {

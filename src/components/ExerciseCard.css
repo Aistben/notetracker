@@ -17,15 +17,15 @@
 .ex-actions { display: flex; gap: 4px; flex-shrink: 0; }
 
 .ex-action-btn {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--surface-alt);
   border: 1px solid var(--border);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--primary);
   transition: all var(--transition);
@@ -127,7 +127,7 @@
 .ex-inputs {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
+  gap: 5px;
   margin-bottom: 8px;
   width: 100%;
 }
@@ -142,7 +142,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
-  height: 36px;
+  height: 32px;
   width: 100%;
   transition: border-color var(--transition);
 }
@@ -150,14 +150,14 @@
 .input-stepper:focus-within { border-color: var(--primary); }
 
 .stepper-btn {
-  width: 28px;
-  min-width: 22px;
+  width: 26px;
+  min-width: 20px;
   flex-shrink: 0;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--primary);
   background: transparent;
@@ -175,7 +175,7 @@
   background: transparent;
   border: none;
   outline: none;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--text);
   font-variant-numeric: tabular-nums;

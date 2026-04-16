@@ -239,9 +239,28 @@
 .swiper-slide {
   height: 100% !important;
   overflow-y: auto;
-  padding-bottom: 80px;
+  padding-bottom: 250px; /* Место под фиксированный футер + полная высота последней карточки */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
 .swiper-slide::-webkit-scrollbar { display: none; }
+
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 480px;
+  width: 100%;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0));
+  padding-left: max(16px, env(safe-area-inset-left, 0));
+  padding-right: max(16px, env(safe-area-inset-right, 0));
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+}

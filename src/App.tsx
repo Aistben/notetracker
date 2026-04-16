@@ -355,23 +355,28 @@ export default function App() {
           )
         })}
       </div>
-
-      {finishError && (
-        <div className="finish-error">⚠️ Введите данные хотя бы в одном упражнении</div>
-      )}
-
-      <button
-        className={`finish-btn ${isDayCompleted(day.key) ? 'finished' : ''} ${finishError ? 'error-shake' : ''}`}
-        onClick={finishWorkout}>
-        🏁 Завершить тренировку
-      </button>
-
-      {allDaysCompleted && (
-        <button className="cycle-btn" onClick={() => setCycleModal(true)}>🔁 Следующий цикл</button>
-      )}
     </SwiperSlide>
   ))}
 </Swiper>
+
+          {/* Фиксированный футер вне Swiper */}
+          {tab === 'tracker' && (
+            <div className="fixed-footer">
+              {finishError && (
+                <div className="finish-error">⚠️ Введите данные хотя бы в одном упражнении</div>
+              )}
+
+              <button
+                className={`finish-btn ${isDayCompleted(days[activeDay]?.key) ? 'finished' : ''} ${finishError ? 'error-shake' : ''}`}
+                onClick={finishWorkout}>
+                🏁 Завершить тренировку
+              </button>
+
+              {allDaysCompleted && (
+                <button className="cycle-btn" onClick={() => setCycleModal(true)}>🔁 Следующий цикл</button>
+              )}
+            </div>
+          )}
             </>
           )}
 
