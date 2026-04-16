@@ -29,6 +29,8 @@ html, body {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 #root { display: flex; flex-direction: column; }
@@ -161,44 +163,49 @@ button { cursor: pointer; border: none; background: none; }
 /* ════════════════════════════════════════════
    МОБИЛЬНАЯ АДАПТАЦИЯ
    ════════════════════════════════════════════ */
+
+/* Узкие телефоны (320–480px) */
 @media (max-width: 430px) {
-  .exercise-card { padding: 11px 10px; }
-  .input-stepper { height: 34px; }
-  .stepper-btn { width: 26px; min-width: 20px; font-size: 15px; }
-  .stepper-input { font-size: 13px; }
-  .input-label { font-size: 9px; }
-  .ex-inputs { gap: 5px; }
-  .add-ex-btn { padding: 12px; font-size: 13px; }
-  .finish-btn, .cycle-btn { padding: 14px; font-size: 14px; }
-  .modal { padding: 18px; }
+  .exercise-card { padding: 12px 10px; }
+  .input-stepper { height: 44px; }
+  .stepper-btn { width: 44px; min-width: 44px; font-size: 18px; }
+  .stepper-input { font-size: 16px; }
+  .input-label { font-size: 11px; }
+  .ex-inputs { gap: 6px; }
+  .add-ex-btn { padding: 14px; font-size: 15px; min-height: 48px; }
+  .finish-btn, .cycle-btn { padding: 16px; font-size: 15px; min-height: 48px; }
+  .modal { padding: 20px; }
   .modal-wide { max-width: 100%; }
-  .modal-steppers { gap: 6px; }
+  .modal-steppers { gap: 8px; }
+  .day-tile { min-height: 72px; }
+  .day-tile-label { font-size: 14px; }
 }
 
-@media (max-width: 375px) {
-  .header { padding: 13px 10px 9px; }
-  .header-title { font-size: 17px; }
-  .header-time { font-size: 15px; }
-  .day-tiles { gap: 5px; }
-  .day-tile { padding: 26px 4px 7px; min-height: 66px; }
-  .day-tile-label { font-size: 13px; }
-  .day-tile-pencil { font-size: 12px; top: 4px; right: 4px; width: 20px; height: 20px; }
-  .exercise-card { padding: 10px 9px; }
-  .ex-name { font-size: 14px; }
-  .ex-action-btn { width: 27px; height: 27px; font-size: 13px; }
-  .ex-actions { gap: 3px; }
-  .ex-inputs { gap: 4px; }
-  .input-stepper { height: 32px; }
-  .stepper-btn { width: 22px; min-width: 18px; font-size: 14px; }
-  .stepper-input { font-size: 12px; }
-  .input-label { font-size: 8px; letter-spacing: 0; }
-  .add-ex-btn { padding: 11px; font-size: 13px; margin-top: 10px; }
-  .finish-btn, .cycle-btn { padding: 13px; font-size: 14px; margin-top: 8px; }
-  .modal { padding: 16px; }
-  .modal-title { font-size: 15px; }
-  .modal-steppers { gap: 5px; }
-  .modal-btn { padding: 10px; font-size: 12px; }
-  .theme-grid { gap: 6px; }
-  .theme-btn { padding: 9px 10px; font-size: 12px; }
+/* Широкие телефоны / планшеты вертикально (481–768px) */
+@media (min-width: 431px) and (max-width: 768px) {
+  .exercise-card { padding: 14px 12px; }
+  .input-stepper { height: 48px; }
+  .stepper-btn { width: 48px; min-width: 48px; font-size: 20px; }
+  .stepper-input { font-size: 16px; }
+  .add-ex-btn, .finish-btn, .cycle-btn { min-height: 52px; }
+  .modal { max-width: 400px; }
+}
+
+/* Улучшения только для устройств с hover (десктоп) */
+@media (hover: hover) {
+  .exercise-card:hover { border-color: color-mix(in srgb, var(--primary) 28%, transparent); }
+  .day-tile:hover { transform: translateY(-2px); }
+  .theme-btn:hover { transform: translateY(-1px); }
+}
+
+/* Portrait / Landscape адаптация */
+@media (orientation: portrait) {
+  .modal { max-height: 90vh; overflow-y: auto; }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .modal { max-height: 85vh; }
+  .header { min-height: 48px; }
+  .day-tile { min-height: 60px; padding: 20px 6px 6px; }
 }
 ::selection { background: var(--primary); color: var(--bg); }

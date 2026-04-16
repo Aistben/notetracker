@@ -66,12 +66,6 @@ export default function App() {
   // Ref для Swiper
   const swiperRef = useRef<any>(null)
 
-  useEffect(() => {
-    if (swiperRef.current?.swiper) {
-      swiperRef.current.swiper.slideTo(activeDay, 0)
-    }
-  }, [activeDay])
-
   useEffect(() => { const t = setInterval(() => setNow(new Date()), 1000); return () => clearInterval(t) }, [])
   const currentDay = days[activeDay]
 

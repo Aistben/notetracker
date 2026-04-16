@@ -17,19 +17,20 @@
 .ex-actions { display: flex; gap: 4px; flex-shrink: 0; }
 
 .ex-action-btn {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--surface-alt);
   border: 1px solid var(--border);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--primary);
   transition: all var(--transition);
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .ex-action-btn.pencil:hover { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 10%, transparent); }

@@ -31,12 +31,13 @@
   background: var(--input-bg);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 14px;
+  padding: 12px 14px;
+  font-size: 16px;
   color: var(--text);
   outline: none;
   transition: border-color var(--transition);
   margin-bottom: 4px;
+  min-height: 48px;
 }
 
 .modal-input:focus { border-color: var(--primary); }
@@ -99,8 +100,8 @@
   background: var(--input-bg);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 13px;
+  padding: 10px 12px;
+  font-size: 16px;
   color: var(--text);
   outline: none;
   appearance: none;
@@ -108,6 +109,7 @@
   width: 100%;
   transition: border-color var(--transition);
   cursor: pointer;
+  min-height: 48px;
 }
 
 .modal-select:focus { border-color: var(--primary); }
@@ -115,7 +117,16 @@
 .modal-stepper-group { display: flex; flex-direction: column; gap: 5px; align-items: center; }
 
 .modal-btns { display: flex; gap: 10px; }
-.modal-btn { flex: 1; padding: 11px 14px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; transition: all var(--transition); }
+.modal-btn {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  transition: all var(--transition);
+  min-height: 48px;
+  -webkit-tap-highlight-color: transparent;
+}
 .modal-btn.cancel { background: var(--surface-alt); border: 1px solid var(--border); color: var(--text-sec); }
 .modal-btn.cancel:hover { border-color: var(--text-sec); }
 .modal-btn.confirm { background: #8a2020; color: #f0c0c0; }
