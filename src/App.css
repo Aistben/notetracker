@@ -14,9 +14,6 @@
   padding-right: max(16px, env(safe-area-inset-right, 0));
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 50;
   transition: background 0.3s ease;
   display: flex;
   justify-content: space-between;
@@ -83,10 +80,12 @@
 .header-date { font-size: 12px; color: var(--text-sec); text-transform: capitalize; }
 .header-time { font-size: 17px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; margin-top: 2px; }
 
-.main { flex: 1; padding: 12px 10px 90px;
+.main { flex: 1; padding: 12px 10px 100px;
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .main::-webkit-scrollbar { display: none; }
@@ -239,7 +238,7 @@
 .swiper-slide {
   height: 100% !important;
   overflow-y: auto;
-  padding-bottom: 250px; /* Место под фиксированный футер + полная высота последней карточки */
+  padding-bottom: 20px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
