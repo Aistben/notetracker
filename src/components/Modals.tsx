@@ -4,47 +4,6 @@ import { DayConfig, NewExerciseForm, ExerciseType, Intensity } from '../utils/co
 import { intensityBg, intensityColor } from '../utils/helpers'
 import './Modals.css'
 
-interface BadgeSelectProps {
-  value: string | null
-  options: { value: string; label: string; color: string; bg: string; borderColor: string }[]
-  onChange: (value: string) => void
-}
-
-function BadgeSelect({ value, options, onChange }: BadgeSelectProps) {
-  const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }
-    document.addEventListener('click', handleClick)
-    return () => document.removeEventListener('click', handleClick)
-  }, [])
-
-  const selected = value ? options.find(o => o.value === value) : null
-
-  return (
-    <div ref={ref} className="modal-badge-select">
-      <button className="modal-badge-selected" onClick={() => setOpen(!open)} style={{ color: 'var(--text)', background: 'var(--input-bg)', borderColor: 'var(--border)' }}>
-        {selected?.label || ''}
-      </button>
-      {open && (
-        <div className="modal-badge-dropdown">
-          {options.map(opt => (
-            <button
-              key={opt.value}
-              className={`modal-badge-option ${value === opt.value ? 'active' : ''}`}
-              style={{ color: opt.color, background: opt.bg, borderColor: opt.borderColor }}
-              onClick={() => { onChange(opt.value); setOpen(false) }}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-}
-
 interface ModalsProps {
   days: DayConfig[]
   editDayModal: { dayIdx: number; value: string } | null
@@ -124,39 +83,47 @@ export default function Modals({
             <div className="modal-title">Введите название основного упражнения</div>
             <div className="modal-form">
               <div className="modal-field">
-                <label className="modal-label">Название упражнения</label>
                 <input
                   className="modal-input"
                   value={newEx.name}
                   maxLength={40}
                   autoFocus
                   onChange={(e) => onSetNewEx((f) => ({ ...f, name: e.target.value }))}
-                  placeholder="Например: Жим лёжа"
+                  placeholder="Название упражнения"
                 />
               </div>
-              <div className="modal-row2">
-                <div className="modal-field half">
-                  <label className="modal-label">Приоритет</label>
-                  <BadgeSelect
-                    value={newEx.type}
-                    onChange={(val) => onSetNewEx((f) => ({ ...f, type: val as ExerciseType }))}
-                    options={[
-                      { value: 'основа', label: 'основа', color: '#e05555', bg: 'rgba(224,85,85,0.10)', borderColor: 'rgba(224,85,85,0.30)' },
-                      { value: 'подсобка', label: 'подсобка', color: '#8090a8', bg: 'rgba(128,144,168,0.08)', borderColor: 'rgba(128,144,168,0.22)' }
-                    ]}
-                  />
+              <div className="ex-edit-badges">
+                <div className="ex-edit-badge-group">
+                  {(['основа', 'подсобка'] as ExerciseType[]).map(opt => {
+                    const def = opt === 'основа' ? { color: '#e05555', bg: 'rgba(224,85,85,0.10)', borderColor: 'rgba(224,85,85,0.30)' } : { color: '#8090a8', bg: 'rgba(128,144,168,0.08)', borderColor: 'rgba(128,144,168,0.22)' }
+                    return (
+                      <button
+                        key={opt}
+                        className={`ex-badge-opt ${newEx.type === opt ? 'active' : ''}`}
+                        style={newEx.type === opt ? { background: def.bg, borderColor: def.borderColor, color: def.color } : undefined}
+                        onClick={() => onSetNewEx((f) => ({ ...f, type: opt }))}
+                      >
+                        {opt}
+                      </button>
+                    )
+                  })}
                 </div>
-                <div className="modal-field half">
-                  <label className="modal-label">Интенсивность</label>
-                  <BadgeSelect
-                    value={newEx.intensity}
-                    onChange={(val) => onSetNewEx((f) => ({ ...f, intensity: val as Intensity }))}
-                    options={[
-                      { value: 'тяжёлая', label: 'тяжёлая', color: '#e05555', bg: 'rgba(224,85,85,0.12)', borderColor: 'rgba(224,85,85,0.30)' },
-                      { value: 'средняя', label: 'средняя', color: '#c8a840', bg: 'rgba(200,168,64,0.12)', borderColor: 'rgba(200,168,64,0.30)' },
-                      { value: 'лёгкая', label: 'лёгкая', color: '#48a870', bg: 'rgba(72,168,112,0.12)', borderColor: 'rgba(72,168,112,0.30)' }
-                    ]}
-                  />
+                <div className="ex-edit-badge-group">
+                  {(['тяжёлая', 'средняя', 'лёгкая'] as Intensity[]).map(opt => {
+                    const def = opt === 'тяжёлая' ? { color: '#e05555', bg: 'rgba(224,85,85,0.12)', borderColor: 'rgba(224,85,85,0.30)' } :
+                                opt === 'средняя' ? { color: '#c8a840', bg: 'rgba(200,168,64,0.12)', borderColor: 'rgba(200,168,64,0.30)' } :
+                                { color: '#48a870', bg: 'rgba(72,168,112,0.12)', borderColor: 'rgba(72,168,112,0.30)' }
+                    return (
+                      <button
+                        key={opt}
+                        className={`ex-badge-opt ${newEx.intensity === opt ? 'active' : ''}`}
+                        style={newEx.intensity === opt ? { background: def.bg, borderColor: def.borderColor, color: def.color } : undefined}
+                        onClick={() => onSetNewEx((f) => ({ ...f, intensity: opt }))}
+                      >
+                        {opt}
+                      </button>
+                    )
+                  })}
                 </div>
               </div>
               <div className="modal-steppers">

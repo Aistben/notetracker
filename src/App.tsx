@@ -69,6 +69,13 @@ export default function App() {
   useEffect(() => { const t = setInterval(() => setNow(new Date()), 1000); return () => clearInterval(t) }, [])
   const currentDay = days[activeDay]
 
+  // Синхронизация Swiper с activeDay
+  useEffect(() => {
+    if (swiperRef.current?.swiper && swiperRef.current.swiper.activeIndex !== activeDay) {
+      swiperRef.current.swiper.slideTo(activeDay, 0)
+    }
+  }, [activeDay])
+
   useEffect(() => {
     if (!Array.isArray(days) || days.length === 0) {
       setDays(DEFAULT_DAYS())
