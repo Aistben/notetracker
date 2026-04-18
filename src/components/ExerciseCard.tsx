@@ -101,31 +101,39 @@ function ExerciseCard({
             placeholder={editForm.name}
           />
           <div className="ex-edit-badges">
-            <div className="ex-edit-badge-group">
-              {EXERCISE_TYPES.map(opt => (
-                <button
-                  key={opt.value}
-                  className={`ex-badge-opt ${editForm.type === opt.value ? 'active' : ''}`}
-                  style={editForm.type === opt.value ? { background: opt.bg, borderColor: opt.borderColor, color: opt.color } : undefined}
-                  onClick={() => onEditFormChange({ type: opt.value })}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-            <div className="ex-edit-badge-group">
-              {INTENSITY_LEVELS.map(opt => (
-                <button
-                  key={opt.value}
-                  className={`ex-badge-opt ${editForm.intensity === opt.value ? 'active' : ''}`}
-                  style={editForm.intensity === opt.value ? { background: opt.bg, borderColor: opt.borderColor, color: opt.color } : undefined}
-                  onClick={() => onEditFormChange({ intensity: opt.value })}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          </div>
+                <div className="ex-edit-badge-group">
+                  {EXERCISE_TYPES.map(opt => {
+                    const def = opt.value === 'основа' ? { color: 'rgb(243 11 11)', bg: 'rgb(0 0 0 / 10%)', borderColor: 'rgb(255 0 0 / 30%)' } : { color: '#8090a8', bg: 'rgba(128,144,168,0.08)', borderColor: 'rgba(128,144,168,0.22)' }
+                    return (
+                      <button
+                        key={opt.value}
+                        className={`ex-badge-opt ${editForm.type === opt.value ? 'active' : ''}`}
+                        style={editForm.type === opt.value ? { background: def.bg, borderColor: def.borderColor, color: def.color } : undefined}
+                        onClick={() => onEditFormChange({ type: opt.value })}
+                      >
+                        {opt.label}
+                      </button>
+                    )
+                  })}
+                </div>
+                <div className="ex-edit-badge-group">
+                  {INTENSITY_LEVELS.map(opt => {
+                    const def = opt.value === 'тяжёлая' ? { color: '#e05555', bg: 'rgba(224,85,85,0.12)', borderColor: 'rgba(224,85,85,0.30)' } :
+                                opt.value === 'средняя' ? { color: '#c8a840', bg: 'rgba(200,168,64,0.12)', borderColor: 'rgba(200,168,64,0.30)' } :
+                                { color: '#48a870', bg: 'rgba(72,168,112,0.12)', borderColor: 'rgba(72,168,112,0.30)' }
+                    return (
+                      <button
+                        key={opt.value}
+                        className={`ex-badge-opt ${editForm.intensity === opt.value ? 'active' : ''}`}
+                        style={editForm.intensity === opt.value ? { background: def.bg, borderColor: def.borderColor, color: def.color } : undefined}
+                        onClick={() => onEditFormChange({ intensity: opt.value })}
+                      >
+                        {opt.label}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
         </div>
       )}
 
@@ -134,7 +142,7 @@ function ExerciseCard({
           <span
             className="badge"
             style={ex.type === 'основа'
-              ? { color: '#e05555', background: 'rgba(224,85,85,0.10)', borderColor: 'rgba(224,85,85,0.30)' }
+              ? { color: 'rgb(243 11 11)', background: 'rgb(0 0 0 / 10%)', borderColor: 'rgb(255 0 0 / 30%)' }
               : { color: '#8090a8', background: 'rgba(128,144,168,0.08)', borderColor: 'rgba(128,144,168,0.22)' }}
           >
             {ex.type || '?'}

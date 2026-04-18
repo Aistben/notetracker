@@ -95,7 +95,7 @@ export default function Modals({
               <div className="ex-edit-badges">
                 <div className="ex-edit-badge-group">
                   {(['основа', 'подсобка'] as ExerciseType[]).map(opt => {
-                    const def = opt === 'основа' ? { color: '#e05555', bg: 'rgba(224,85,85,0.10)', borderColor: 'rgba(224,85,85,0.30)' } : { color: '#8090a8', bg: 'rgba(128,144,168,0.08)', borderColor: 'rgba(128,144,168,0.22)' }
+                    const def = opt === 'основа' ? { color: 'rgb(243 11 11)', bg: 'rgb(0 0 0 / 10%)', borderColor: 'rgb(255 0 0 / 30%)' } : { color: '#8090a8', bg: 'rgba(128,144,168,0.08)', borderColor: 'rgba(128,144,168,0.22)' }
                     return (
                       <button
                         key={opt}
