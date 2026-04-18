@@ -29,16 +29,14 @@
   box-shadow: 0 0 16px var(--shadow);
 }
 
-.day-tile.completed { border-color: #c04040; }
+.day-tile.active.completed {
+  border-color: #e05555;
+  box-shadow: 0 0 20px rgba(224, 85, 85, 0.5);
+}
 
-.day-tile.completed::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: #c04040;
+.day-tile.completed { 
+  border-color: #e05555; 
+  border-width: 3px;
 }
 
 .day-tile-pencil {
@@ -62,6 +60,11 @@
   min-height: 28px;
 }
 
+.day-tile.completed .day-tile-pencil {
+  color: #e05555;
+  opacity: 1;
+}
+
 .day-tile-pencil:hover {
   opacity: 1;
   background: color-mix(in srgb, var(--primary) 15%, transparent);
@@ -71,19 +74,24 @@
 .day-tile-label { font-size: 14px; font-weight: 700; color: var(--text); }
 
 .day-tile-done {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 900;
-  color: #c04040;
-  background: rgba(192, 64, 64, 0.15);
-  border: 1.5px solid rgba(192, 64, 64, 0.45);
+  color: #e05555;
+  background: rgba(224, 85, 85, 0.15);
+  border: 2px solid rgba(224, 85, 85, 0.6);
   border-radius: 50%;
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
   flex-shrink: 0;
+}
+
+.day-tile.completed .day-tile-done {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .day-tile-sub { width: 100%; display: flex; justify-content: center; align-items: center; min-height: 18px; }

@@ -63,6 +63,17 @@ export interface ThemeConfig {
   shadow: string
 }
 
+export const EXERCISE_TYPES: { value: ExerciseType; label: string; color: string; bg: string; borderColor: string }[] = [
+  { value: 'основа', label: 'основа', color: '#e05555', bg: 'rgba(224,85,85,0.10)', borderColor: 'rgba(224,85,85,0.30)' },
+  { value: 'подсобка', label: 'подсобка', color: '#8090a8', bg: 'rgba(128,144,168,0.08)', borderColor: 'rgba(128,144,168,0.22)' }
+]
+
+export const INTENSITY_LEVELS: { value: Intensity; label: string; color: string; bg: string; borderColor: string }[] = [
+  { value: 'тяжёлая', label: 'тяжёлая', color: '#e05555', bg: 'rgba(224,85,85,0.12)', borderColor: 'rgba(224,85,85,0.30)' },
+  { value: 'средняя', label: 'средняя', color: '#c8a840', bg: 'rgba(200,168,64,0.12)', borderColor: 'rgba(200,168,64,0.30)' },
+  { value: 'лёгкая', label: 'лёгкая', color: '#48a870', bg: 'rgba(72,168,112,0.12)', borderColor: 'rgba(72,168,112,0.30)' }
+]
+
 export const THEMES: Record<ThemeName, ThemeConfig> = {
   neon: {
     name: 'Неон', bg: '#0a0a0f', surface: '#12121a', surfaceAlt: '#1a1a2e',
@@ -95,21 +106,21 @@ export const THEMES: Record<ThemeName, ThemeConfig> = {
     shadow: 'rgba(120,152,176,0.10)'
   },
   moss: {
-    name: 'Мох', bg: '#080c0a', surface: '#101610', surfaceAlt: '#162018',
-    primary: '#5a9870', primaryDark: '#3a7850', text: '#d8eadc', textSec: '#5a8068',
-    accent: '#78b888', border: '#1a2c20', cardBg: '#101e14', inputBg: '#16261a',
-    shadow: 'rgba(90,152,112,0.10)'
+    name: 'Космос', bg: '#0a0510', surface: '#120818', surfaceAlt: '#1a0f24',
+    primary: '#a855f7', primaryDark: '#7c3aed', text: '#f3e8ff', textSec: '#9ca3af',
+    accent: '#d8b4fe', border: '#2d1b4e', cardBg: '#1e1030', inputBg: '#241438',
+    shadow: 'rgba(168,85,247,0.15)'
   },
   wine: {
-    name: 'Гранат', bg: '#0c0808', surface: '#180e0e', surfaceAlt: '#221416',
-    primary: '#a05870', primaryDark: '#804058', text: '#ecdcd8', textSec: '#906070',
-    accent: '#c07888', border: '#2c1820', cardBg: '#1a1010', inputBg: '#221618',
-    shadow: 'rgba(160,88,112,0.10)'
+    name: 'Бирюзовый', bg: '#080c0e', surface: '#0f1416', surfaceAlt: '#151a1c',
+    primary: '#08e8de', primaryDark: '#06b8af', text: '#e0f8f8', textSec: '#588088',
+    accent: '#28f0e0', border: '#1a2428', cardBg: '#0e1416', inputBg: '#141a1c',
+    shadow: 'rgba(8,232,222,0.12)'
   },
   smoke: {
-    name: 'Дым', bg: '#0a0a0a', surface: '#141414', surfaceAlt: '#1c1c1c',
-    primary: '#8898a8', primaryDark: '#6878a0', text: '#e0e4e8', textSec: '#686878',
-    accent: '#a0b0c0', border: '#242428', cardBg: '#161618', inputBg: '#1e2024',
-    shadow: 'rgba(136,152,168,0.10)'
-  }
+    name: 'Индиго', bg: '#060810', surface: '#0e1018', surfaceAlt: '#141824',
+    primary: '#6366f1', primaryDark: '#4f46e5', text: '#eff2ff', textSec: '#94a3b8',
+    accent: '#818cf8', border: '#1a1c30', cardBg: '#171928', inputBg: '#1e2030',
+    shadow: 'rgba(99,102,241,0.15)'
+  },
 }

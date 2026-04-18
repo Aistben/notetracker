@@ -98,8 +98,7 @@ export default function Modals({
         <div className="modal-overlay" onClick={onCloseEditDay}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-icon">✎</div>
-            <div className="modal-title">Название тренировки</div>
-            <div className="modal-text">Короткое описание дня (до 20 символов)</div>
+            <div className="modal-title">Введите название основного упражнения</div>
             <input
               className="modal-input"
               value={editDayModal.value}
@@ -122,7 +121,7 @@ export default function Modals({
         <div className="modal-overlay" onClick={onCloseAddEx}>
           <div className="modal modal-wide" onClick={(e) => e.stopPropagation()}>
             <div className="modal-icon">💪</div>
-            <div className="modal-title">Новое упражнение</div>
+            <div className="modal-title">Введите название основного упражнения</div>
             <div className="modal-form">
               <div className="modal-field">
                 <label className="modal-label">Название упражнения</label>

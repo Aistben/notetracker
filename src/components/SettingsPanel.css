@@ -1,6 +1,42 @@
-.settings { padding: 4px 0; }
-.settings-section { margin-bottom: 12px; transition: background 0.3s ease; }
-.settings-section h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 11px; }
+.settings { 
+  scrollbar-width: none;
+}
+.settings::-webkit-scrollbar { display: none; }
+
+.settings-section { 
+  margin-bottom: 16px; 
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: background 0.3s ease;
+}
+.settings-section h3 { 
+  font-size: 13px; 
+  font-weight: 700; 
+  color: var(--text); 
+  margin-bottom: 12px; 
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.back-btn:hover {
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+}
 
 .theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .theme-btn {
@@ -33,14 +69,14 @@
 .wp-slider-label { font-size: 12px; color: var(--text-sec); }
 .wp-slider { width: 100%; accent-color: var(--primary); height: 4px; cursor: pointer; }
 
-.settings-btns { display: flex; flex-direction: column; gap: 8px; }
+.settings-btns { display: flex; flex-direction: column; gap: 10px; }
 .settings-action-btn {
   width: 100%;
-  padding: 13px 15px;
+  padding: 12px 14px;
   border-radius: var(--radius-sm);
   background: var(--card-bg);
   border: 1px solid var(--border);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text);
   text-align: left;

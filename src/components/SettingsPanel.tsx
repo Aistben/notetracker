@@ -24,6 +24,7 @@ interface SettingsPanelProps {
   onExportData: () => void
   onImportData: (e: ChangeEvent<HTMLInputElement>) => void
   onOpenResetModal: () => void
+  onBack: () => void
 }
 
 export default function SettingsPanel({
@@ -39,10 +40,14 @@ export default function SettingsPanel({
   onWallpaperUpload,
   onExportData,
   onImportData,
-  onOpenResetModal
+  onOpenResetModal,
+  onBack
 }: SettingsPanelProps) {
   return (
     <div className="settings">
+      <button className="back-btn" onClick={onBack}>
+        ← Назад
+      </button>
       <div className="settings-section">
         <h3>🎨 Тема оформления</h3>
         <div className="theme-grid">

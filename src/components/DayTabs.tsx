@@ -26,7 +26,7 @@ export default function DayTabs({
             className={`day-tile ${di === activeDay ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
             onClick={() => onSelectDay(di)}
           >
-            <button
+            <span
               className="day-tile-pencil"
               onClick={(e) => {
                 e.stopPropagation()
@@ -34,13 +34,16 @@ export default function DayTabs({
               }}
             >
               ✎
-            </button>
+            </span>
             <div className="day-tile-top">
               <span className="day-tile-label">{day.shortLabel}</span>
-              {isCompleted && <span className="day-tile-done">✕</span>}
             </div>
             <div className="day-tile-sub">
-              <span className="day-sub-text">{day.subtitle}</span>
+              <span className="day-sub-text">
+                {day.subtitle
+                  ? day.subtitle.charAt(0).toUpperCase() + day.subtitle.slice(1)
+                  : ''}
+              </span>
             </div>
           </button>
         )
