@@ -1,8 +1,10 @@
+@import './fonts.css';
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --font-heading: 'Cormorant Garamond', serif;
-  --font-body: 'Lato', sans-serif;
+  --font-heading: 'Celtes', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --bg: #0a0a0f;
   --surface: #12121a;
   --surface-alt: #1a1a2e;
@@ -30,6 +32,9 @@ html, body {
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-weight: 400;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -138,6 +143,140 @@ button { cursor: pointer; border: none; background: none; }
 
 .has-wallpaper .wp-opacity-row {
   background: rgba(20, 20, 40, 0.35);
+}
+
+/* ════════════════════════════════════════════
+   ТЕМА КОСМОС (moss) — адаптация под обои
+  Glassmorphism эффект
+   ════════════════════════════════════════════ */
+
+.theme-moss.has-wallpaper .day-tile {
+  background: rgba(18, 8, 24, 0.55);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.theme-moss.has-wallpaper .day-tile {
+  background: rgba(18, 8, 24, 0.55);
+  border: 2px solid rgba(168, 85, 247, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 28px 8px 8px;
+  text-align: center;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-moss.has-wallpaper .day-tile:active { transform: scale(0.96); }
+
+.theme-moss.has-wallpaper .day-tile.active {
+  border-color: #a855f7;
+  background: rgba(30, 16, 48, 0.65);
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.4);
+}
+
+.theme-moss.has-wallpaper .day-tile.active.completed {
+  border-color: #a855f7;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+.theme-moss.has-wallpaper .day-tile-pencil {
+  color: #a855f7;
+}
+
+.theme-moss.has-wallpaper .day-tile-pencil:hover {
+  background: rgba(168, 85, 247, 0.15);
+}
+
+.theme-moss.has-wallpaper .day-tile.active .day-tile-label {
+  color: #e0d0ff;
+}
+
+.theme-moss.has-wallpaper .day-tile.active.completed {
+  border-color: #a855f7;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+.theme-moss.has-wallpaper .day-tile.completed {
+  border-color: #e05555;
+  border-width: 3px;
+}
+
+.theme-moss.has-wallpaper .exercise-card {
+  background: rgba(30, 16, 48, 0.45);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.theme-moss.has-wallpaper .settings-section {
+  background: rgba(30, 16, 48, 0.45);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.theme-moss.has-wallpaper .settings-action-btn {
+  background: rgba(20, 10, 40, 0.4);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.theme-moss.has-wallpaper .theme-btn {
+  background: rgba(20, 10, 40, 0.35);
+}
+
+.theme-moss.has-wallpaper .ex-edit-form {
+  background: rgba(20, 10, 40, 0.5);
+}
+
+.theme-moss.has-wallpaper .ex-history {
+  background: rgba(10, 5, 16, 0.45);
+}
+
+.theme-moss.has-wallpaper .input-stepper {
+  background: rgba(20, 10, 40, 0.4);
+}
+
+.theme-moss.has-wallpaper .ex-note {
+  background: rgba(20, 10, 40, 0.4);
+}
+
+.theme-moss.has-wallpaper .toggle-btn {
+  background: rgba(20, 10, 40, 0.35);
+}
+
+
+.theme-moss.has-wallpaper .ex-last {
+  background: rgba(20, 10, 40, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-moss.has-wallpaper .add-ex-btn {
+  background: rgba(20, 10, 40, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-moss.has-wallpaper .cycle-btn {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: #e0d0ff;
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.2);
+}
+
+.theme-moss.has-wallpaper .modal {
+  background: rgba(18, 8, 24, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.theme-moss.has-wallpaper .wp-opacity-row {
+  background: rgba(20, 10, 40, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 

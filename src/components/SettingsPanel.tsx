@@ -45,11 +45,13 @@ export default function SettingsPanel({
 }: SettingsPanelProps) {
   return (
     <div className="settings">
-      <button className="back-btn" onClick={onBack}>
-        ← Назад
-      </button>
       <div className="settings-section">
-        <h3>🎨 Тема оформления</h3>
+        <div className="section-header">
+          <h3>🎨 Тема оформления</h3>
+          <button className="back-btn" onClick={onBack}>
+            ← Назад
+          </button>
+        </div>
         <div className="theme-grid">
           {(Object.keys(themes) as ThemeName[]).map((tKey) => (
             <button
@@ -70,23 +72,7 @@ export default function SettingsPanel({
       </div>
 
       <div className="settings-section">
-        <h3>🖼️ Обои</h3>
-        {wallpaper && (
-          <div className="wp-opacity-row">
-            <label className="wp-slider-label">
-              Яркость обоев: {Math.round(wallpaperOpacity * 100)}%
-            </label>
-            <input
-              type="range"
-              min="0.3"
-              max="1.0"
-              step="0.05"
-              value={wallpaperOpacity}
-              onChange={(e) => onSetWallpaperOpacity(parseFloat(e.target.value))}
-              className="wp-slider"
-            />
-          </div>
-        )}
+        <h3 className="section-title">🖼️ Обои</h3>
         <div className="settings-btns">
           <button className="settings-action-btn" onClick={() => wallpaperRef.current?.click()}>
             📷 {wallpaper ? 'Сменить обои' : 'Загрузить обои'}
@@ -101,12 +87,12 @@ export default function SettingsPanel({
       </div>
 
       <div className="settings-section">
-        <h3>💾 Данные</h3>
+        <h3 className="section-title">💾 Данные</h3>
         <div className="settings-btns">
           <button className="settings-action-btn" onClick={onExportData}>📤 Экспорт (JSON)</button>
           <button className="settings-action-btn" onClick={() => fileInputRef.current?.click()}>📥 Импорт (JSON)</button>
           <input ref={fileInputRef} type="file" accept=".json" style={{ display: 'none' }} onChange={onImportData} />
-          <button className="settings-action-btn danger" onClick={onOpenResetModal}>🗑️ Сброс всех данных</button>
+          <button className="settings-action-btn danger" onClick={onOpenResetModal}>🗑️ Сброс данных</button>
         </div>
       </div>
     </div>

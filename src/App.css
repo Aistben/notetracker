@@ -150,7 +150,6 @@
 .finish-btn:active { transform: translateY(1px); }
 .finish-btn.finished { background: linear-gradient(135deg, #8a1a1a, #c04040); box-shadow: 0 4px 16px rgba(192, 64, 64, 0.25); }
 .finish-btn:disabled {
-  opacity: 0.6;
   cursor: not-allowed;
   transform: none;
 }
@@ -274,6 +273,7 @@
 .swiper-slide {
   height: 100% !important;
   overflow-y: auto;
+  overflow-x: hidden;
   padding-bottom: 20px;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -293,12 +293,12 @@
   padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0));
   padding-left: max(16px, env(safe-area-inset-left, 0));
   padding-right: max(16px, env(safe-area-inset-right, 0));
-  background: var(--surface);
-  border-top: 1px solid var(--border);
   z-index: 60;
   display: flex;
   flex-direction: column;
   gap: 10px;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 16px 16px 0 0;
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
 }

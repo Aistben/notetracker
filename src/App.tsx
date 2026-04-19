@@ -15,7 +15,8 @@ import {
   HistoryEntry,
   Intensity,
   NewExerciseForm,
-  TabName
+  TabName,
+  ThemeName
 } from './utils/constants'
 import {
   clampReps,
@@ -34,8 +35,32 @@ export default function App() {
   const [days, setDays] = useLocalStorage<DayConfig[]>('workout_days', DEFAULT_DAYS())
   const [history, setHistory] = useLocalStorage<HistoryEntry[]>('workout_history', [])
   const { theme, setTheme, themes } = useTheme('neon')
-  const [wallpaperOpacity, setWallpaperOpacity] = useLocalStorage<number>('workout_wp_opacity', 0.65)
+  const [wallpaperOpacity, setWallpaperOpacity] = useLocalStorage<number>('workout_wp_opacity', 0.85)
   const [wallpaper, setWallpaper] = useState<string | null>(() => getRawLocalStorage('workout_wallpaper'))
+  const [manualWallpaperSet, setManualWallpaperSet] = useState(false) // Флаг: пользователь сам загрузил обои
+
+  // Маппинг тем → обоев
+  const THEME_WALLPAPERS: Record<ThemeName, string | null> = {
+    neon: null,
+    midnight: null,
+    ice: null,
+    deep: null,
+    steel: null,
+    moss: '/wallpaper/cosmos-bg.jpg', // Космос
+    wine: null,
+    smoke: null
+  }
+
+  // Автоматическая смена обоев при смене темы (если пользователь не загрузил свои)
+  useEffect(() => {
+    if (!manualWallpaperSet) {
+      const wp = THEME_WALLPAPERS[theme]
+      setWallpaper(wp)
+      if (wp) {
+        setRawLocalStorage('workout_wallpaper', wp)
+      }
+    }
+  }, [theme, manualWallpaperSet])
 
   const [activeDay, setActiveDay] = useLocalStorage<number>('workout_active_day', 0)
   const [tab, setTab] = useLocalStorage<TabName>('workout_tab', 'tracker')
@@ -255,11 +280,20 @@ export default function App() {
   const handleWallpaperUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]; if (!file) return
     const reader = new FileReader()
-    reader.onload = ev => { const b64 = ev.target?.result as string; setWallpaper(b64); setRawLocalStorage('workout_wallpaper', b64) }
+    reader.onload = ev => { 
+      const b64 = ev.target?.result as string; 
+      setWallpaper(b64); 
+      setRawLocalStorage('workout_wallpaper', b64);
+      setManualWallpaperSet(true); // Пользователь загрузил свои обои
+    }
     reader.readAsDataURL(file); e.target.value = ''
   }
 
-  const removeWallpaper = () => { setWallpaper(null); removeLocalStorage('workout_wallpaper') }
+  const removeWallpaper = () => { 
+    setWallpaper(null); 
+    removeLocalStorage('workout_wallpaper');
+    setManualWallpaperSet(false); // Сброс флага, чтобы тема снова управляла обоями
+  }
 
   const exportData = () => {
     const safeCompleted = Array.isArray(completed) ? completed : []
@@ -324,7 +358,7 @@ export default function App() {
         />
       )}
 
-      <div className={`app ${wallpaper ? 'has-wallpaper' : ''}`}>
+      <div className={`app ${wallpaper ? 'has-wallpaper' : ''} ${theme === 'moss' ? 'theme-moss' : ''}`}>
         <main className={`main ${tab === 'settings' ? 'settings-active' : ''}`}>
           {tab === 'tracker' && (
             <>

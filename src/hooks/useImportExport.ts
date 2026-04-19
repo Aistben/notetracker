@@ -18,7 +18,7 @@ export function useImportExport(
   setCompleted: (fn: (c: string[]) => string[]) => void
 ) {
   const [wallpaper, setWallpaper] = useState<string | null>(() => getRawLocalStorage('workout_wallpaper'))
-  const [wallpaperOpacity, setWallpaperOpacity] = useLocalStorage<number>('workout_wp_opacity', 0.65)
+  const [wallpaperOpacity, setWallpaperOpacity] = useLocalStorage<number>('workout_wp_opacity', 0.85)
 
   const todayStr = new Date().toLocaleDateString('ru-RU')
 

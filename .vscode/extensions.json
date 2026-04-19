@@ -1,3 +1,5 @@
 {
-    "recommendations": []
+    "recommendations": [
+        "koda.koda-cli-vscode-ide-companion"
+    ]
 }
