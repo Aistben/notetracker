@@ -41,12 +41,12 @@ export default function App() {
 
   // Маппинг тем → обоев
   const THEME_WALLPAPERS: Record<ThemeName, string | null> = {
-    neon: null,
+    neon: '/wallpaper/neon-bg.png',
     midnight: null,
     ice: null,
     deep: null,
     steel: null,
-    moss: '/wallpaper/cosmos-bg.jpg', // Космос
+    moss: '/wallpaper/cosmos-bg.jpg',
     wine: null,
     smoke: null
   }
@@ -358,7 +358,7 @@ export default function App() {
         />
       )}
 
-      <div className={`app ${wallpaper ? 'has-wallpaper' : ''} ${theme === 'moss' ? 'theme-moss' : ''}`}>
+      <div className={`app ${wallpaper ? 'has-wallpaper' : ''} theme-${theme}`}>
         <main className={`main ${tab === 'settings' ? 'settings-active' : ''}`}>
           {tab === 'tracker' && (
             <>

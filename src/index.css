@@ -3,8 +3,35 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --font-heading: 'Celtes', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* ── ШРИФТЫ ─────────────────────────────── */
+  --font-heading: 'Playfair Display', 'Celkes', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: 'Fira Code', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  /* ── ТИПОГРАФИЧЕСКАЯ ШКАЛА (Mobile First) ───────────────── */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.8125rem;  /* 13px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 0.9375rem;  /* 15px */
+  --text-lg: 1rem;       /* 16px */
+  --text-xl: 1.125rem;   /* 18px */
+  --text-2xl: 1.25rem;   /* 20px */
+  --text-3xl: 1.5rem;    /* 24px */
+  --text-4xl: 1.875rem;  /* 30px */
+  --text-5xl: 2.25rem;   /* 36px */
+  
+  /* ── ИНТЕРВАЛЫ ─────────────────────────────── */
+  --leading-tight: 1.1;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+  --leading-loose: 1.8;
+  
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.05em;
+  
+  /* ── ЦВЕТА ─────────────────────────────── */
   --bg: #0a0a0f;
   --surface: #12121a;
   --surface-alt: #1a1a2e;
@@ -12,6 +39,7 @@
   --primary-dark: #0099aa;
   --text: #e8e8f0;
   --text-sec: #7a7a9a;
+  --text-muted: #5a5a7a;
   --accent: #cc005a;
   --border: #22223a;
   --card-bg: #14142a;
@@ -29,6 +57,9 @@ html, body, #root {
 
 html, body {
   font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
@@ -40,11 +71,72 @@ html, body {
   touch-action: manipulation;
 }
 
+/* ── ТИПОГРАФИЧЕСКАЯ ИЕРАРХИЯ ───────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text);
+  margin-bottom: 0.5em;
 }
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+h4 { font-size: var(--text-lg); }
+h5 { font-size: var(--text-md); }
+h6 { font-size: var(--text-sm); }
+
+/* ── ТЕКСТОВЫЕ УРОВНИ ─────────────────────────── */
+.text-title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-subtitle {
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+}
+
+.text-body {
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+}
+
+.text-small {
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-normal);
+  color: var(--text-sec);
+}
+
+.text-caption {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+}
+
+.text-sec { color: var(--text-sec); }
+.text-muted { color: var(--text-muted); }
+.text-primary { color: var(--primary); }
+.text-accent { color: var(--accent); }
 
 #root { display: flex; flex-direction: column; }
 input, textarea, select, button { font-family: inherit; font-size: inherit; color: inherit; }
@@ -274,6 +366,122 @@ button { cursor: pointer; border: none; background: none; }
 }
 
 .theme-moss.has-wallpaper .wp-opacity-row {
+  background: rgba(20, 10, 40, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ════════════════════════════════════════════
+   ТЕМА НЕОН (neon) — адаптация под обои
+   background: rgba(30, 16, 48, 0.45) для плиток
+   ════════════════════════════════════════════ */
+
+.theme-neon.has-wallpaper .wallpaper-bg {
+  background-image: url('/wallpaper/neon-bg.png');
+}
+
+.theme-neon.has-wallpaper .day-tile {
+  background: rgba(30, 16, 48, 0.45);
+  border: 2px solid rgba(0, 212, 232, 0.3);
+}
+
+.theme-neon.has-wallpaper .day-tile:active { transform: scale(0.96); }
+
+.theme-neon.has-wallpaper .day-tile.active {
+  border-color: var(--primary);
+  background: rgba(30, 16, 48, 0.65);
+  box-shadow: 0 0 16px var(--shadow);
+}
+
+.theme-neon.has-wallpaper .day-tile.active.completed {
+  border-color: #e05555;
+  box-shadow: 0 0 20px rgba(224, 85, 85, 0.5);
+}
+
+.theme-neon.has-wallpaper .day-tile.completed {
+  border-color: #e05555;
+  border-width: 3px;
+}
+
+.theme-neon.has-wallpaper .day-tile-pencil {
+  color: var(--primary);
+}
+
+.theme-neon.has-wallpaper .day-tile-pencil:hover {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.theme-neon.has-wallpaper .day-tile.active .day-tile-label {
+  color: var(--text);
+}
+
+.theme-neon.has-wallpaper .exercise-card {
+  background: rgba(30, 16, 48, 0.45);
+  border: 1px solid rgba(0, 212, 232, 0.2);
+}
+
+.theme-neon.has-wallpaper .settings-section {
+  background: rgba(30, 16, 48, 0.45);
+  border: 1px solid rgba(0, 212, 232, 0.25);
+}
+
+.theme-neon.has-wallpaper .settings-action-btn {
+  background: rgba(20, 10, 40, 0.4);
+  border: 1px solid rgba(0, 212, 232, 0.2);
+}
+
+.theme-neon.has-wallpaper .theme-btn {
+  background: rgba(20, 10, 40, 0.35) !important;
+}
+
+.theme-neon.has-wallpaper .ex-edit-form {
+  background: rgba(20, 10, 40, 0.5);
+}
+
+.theme-neon.has-wallpaper .ex-history {
+  background: rgba(10, 5, 16, 0.45);
+}
+
+.theme-neon.has-wallpaper .input-stepper {
+  background: rgba(20, 10, 40, 0.4);
+}
+
+.theme-neon.has-wallpaper .ex-note {
+  background: rgba(20, 10, 40, 0.4);
+}
+
+.theme-neon.has-wallpaper .toggle-btn {
+  background: rgba(20, 10, 40, 0.35);
+}
+
+.theme-neon.has-wallpaper .ex-last {
+  background: rgba(20, 10, 40, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-neon.has-wallpaper .add-ex-btn {
+  background: rgba(20, 10, 40, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-neon.has-wallpaper .cycle-btn {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 212, 232, 0.35);
+  color: var(--text);
+  box-shadow: 0 4px 16px rgba(0, 212, 232, 0.2);
+}
+
+.theme-neon.has-wallpaper .modal {
+  background: rgba(18, 8, 24, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 212, 232, 0.3);
+}
+
+.theme-neon.has-wallpaper .wp-opacity-row {
   background: rgba(20, 10, 40, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
