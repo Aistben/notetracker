@@ -6,7 +6,8 @@
   margin: 0 auto;
   width: 100%;
   position: relative;
-  padding-bottom: 100px;
+  padding-bottom: 0;
+  --footer-gap: 112px;
 }
 
 .header {
@@ -118,6 +119,10 @@
 .main::-webkit-scrollbar { display: none; }
 
 .main.settings-active {
+  overflow-y: hidden;
+}
+
+.main.tracker-active {
   overflow-y: hidden;
 }
 
@@ -370,7 +375,8 @@
 
 .swiper {
   width: 100%;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   touch-action: pan-y pinch-zoom;
   overflow: visible;
 }
@@ -379,7 +385,7 @@
   height: 100% !important;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-bottom: 90px;
+  padding-bottom: var(--footer-gap);
   scrollbar-width: none;
   -ms-overflow-style: none;
   display: flex;

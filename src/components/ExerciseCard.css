@@ -1,5 +1,5 @@
 .exercises-list { display: flex; flex-direction: column; gap: 10px; }
-.exercises-list .exercise-card:last-child { margin-bottom: 48px; }
+.exercises-list .exercise-card:last-child { margin-bottom: 0; }
 
 .exercise-card {
   background: var(--card-bg);

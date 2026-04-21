@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ChangeEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -83,12 +83,16 @@ export default function App() {
   const wallpaperRef    = useRef<HTMLInputElement>(null)
   const manualDayOverrideRef = useRef(false)
   const didAutoAdvanceRef = useRef<string | null>(null)
+  const footerRef = useRef<HTMLDivElement>(null)
+  const footerButtonsRef = useRef<HTMLDivElement>(null)
 
   // Ref для Swiper
   const swiperRef = useRef<any>(null)
+  const [footerGap, setFooterGap] = useState(20)
 
   useEffect(() => { const t = setInterval(() => setNow(new Date()), 1000); return () => clearInterval(t) }, [])
   const currentDay = days[activeDay]
+
 
   // Синхронизация Swiper с activeDay
   useEffect(() => {
@@ -117,6 +121,32 @@ export default function App() {
     Array.isArray(completed) && completed.includes(dayKey), [completed])
 
   const allDaysCompleted = Array.isArray(days) && days.length > 0 && days.every(d => isDayCompleted(d.key))
+
+  useEffect(() => {
+    if (tab !== 'tracker') return
+    const footer = footerRef.current
+    const buttons = footerButtonsRef.current
+    if (!footer || !buttons) return
+    const updateGap = () => {
+      const buttonsTop = buttons.getBoundingClientRect().top
+      const nextGap = Math.max(20, Math.ceil(window.innerHeight - buttonsTop + 20))
+      setFooterGap(nextGap)
+    }
+    updateGap()
+
+    const observer = new ResizeObserver(updateGap)
+    observer.observe(footer)
+    observer.observe(buttons)
+    window.addEventListener('resize', updateGap)
+    window.addEventListener('orientationchange', updateGap)
+    window.addEventListener('scroll', updateGap, true)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', updateGap)
+      window.removeEventListener('orientationchange', updateGap)
+      window.removeEventListener('scroll', updateGap, true)
+    }
+  }, [tab, allDaysCompleted, finishError])
 
   const getNextUncompletedDayIdx = useCallback((fromIdx: number) => {
     if (!Array.isArray(days) || days.length === 0) return 0
@@ -187,8 +217,10 @@ export default function App() {
   }, [])
 
   const handleSelectDay = (idx: number) => {
+    const maxIdx = Math.max(days.length - 1, 0)
+    const safeIdx = Math.min(Math.max(idx, 0), maxIdx)
     manualDayOverrideRef.current = true
-    setActiveDay(idx)
+    setActiveDay(safeIdx)
   }
 
   const updateExercise = (dayIdx: number, exIdx: number, patch: Partial<Exercise>) =>
@@ -245,12 +277,6 @@ export default function App() {
   }
 
   const todayStr = new Date().toLocaleDateString('ru-RU')
-
-  const handleSlideChangeTransitionEnd = () => {
-    if (swiperRef.current?.swiper) {
-      swiperRef.current.swiper.updateAutoHeight()
-    }
-  }
 
   const finishWorkoutWrapper = () => {
     const success = finishWorkout(activeDay)
@@ -342,6 +368,8 @@ export default function App() {
     return clampReps(value)
   }
 
+  const appStyle = { '--footer-gap': `${footerGap}px` } as CSSProperties
+
   return (
     <>
       {wallpaper && (
@@ -354,8 +382,8 @@ export default function App() {
         />
       )}
 
-      <div className={`app ${wallpaper ? 'has-wallpaper' : ''} theme-${theme}`}>
-        <main className={`main ${tab === 'settings' ? 'settings-active' : ''}`}>
+      <div className={`app ${wallpaper ? 'has-wallpaper' : ''} theme-${theme}`} style={appStyle}>
+        <main className={`main ${tab === 'settings' ? 'settings-active' : ''} ${tab === 'tracker' ? 'tracker-active' : ''}`}>
           {tab === 'tracker' && (
             <>
               <DayTabs
@@ -370,11 +398,13 @@ export default function App() {
   ref={swiperRef}
   spaceBetween={16}
   slidesPerView={1}
-  onSlideChange={(swiper) => setActiveDay(swiper.activeIndex)}
-  onSlideChangeTransitionStart={() => {
-    if (swiperRef.current?.swiper) {
-      swiperRef.current.swiper.updateAutoHeight()
+  onSlideChange={(swiper) => {
+    const maxIdx = Math.max(days.length - 1, 0)
+    const safeIdx = Math.min(Math.max(swiper.activeIndex, 0), maxIdx)
+    if (safeIdx !== swiper.activeIndex) {
+      swiper.slideTo(safeIdx, 0)
     }
+    setActiveDay(safeIdx)
   }}
   onSlideChangeTransitionEnd={() => {
     if (swiperRef.current?.swiper) {
@@ -383,6 +413,9 @@ export default function App() {
   }}
   initialSlide={activeDay}
   speed={400}
+  resistanceRatio={0}
+  touchReleaseOnEdges={false}
+  allowTouchMove={days.length > 1}
   style={{ width: '100%', height: 'calc(100vh - 240px)', minHeight: '300px' }}
 >
   {days.map((day) => (
@@ -449,12 +482,12 @@ export default function App() {
 
         {/* Фиксированный футер вне main */}
         {tab === 'tracker' && (
-          <div className="fixed-footer">
+          <div className="fixed-footer" ref={footerRef}>
             {finishError && (
               <div className="finish-error">⚠️ Введите данные хотя бы в одном упражнении</div>
             )}
 
-            <div className="footer-buttons">
+            <div className="footer-buttons" ref={footerButtonsRef}>
               {allDaysCompleted ? (
                 <button className="cycle-btn" onClick={() => setCycleModal(true)} style={{ flex: 1, margin: 0 }}>🔁 Следующий цикл</button>
               ) : (
