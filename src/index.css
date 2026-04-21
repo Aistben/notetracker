@@ -372,6 +372,138 @@ button { cursor: pointer; border: none; background: none; }
 }
 
 /* ════════════════════════════════════════════
+   ТЕМА ЗАКАТ (sunset) — адаптация под обои
+   ════════════════════════════════════════════ */
+
+.theme-sunset.has-wallpaper .day-tile {
+  background: rgba(18, 8, 24, 0.55);
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.theme-sunset.has-wallpaper .day-tile {
+  background: rgba(18, 8, 24, 0.55);
+  border: 2px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  border-radius: var(--radius-sm);
+  padding: 28px 8px 8px;
+  text-align: center;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-sunset.has-wallpaper .day-tile:active { transform: scale(0.96); }
+
+.theme-sunset.has-wallpaper .day-tile.active {
+  border-color: var(--primary);
+  background: rgba(30, 16, 48, 0.65);
+  box-shadow: 0 0 16px var(--shadow);
+}
+
+.theme-sunset.has-wallpaper .day-tile.active.completed {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 50%, transparent);
+}
+
+.theme-sunset.has-wallpaper .day-tile-pencil {
+  color: var(--primary);
+}
+
+.theme-sunset.has-wallpaper .day-tile-pencil:hover {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.theme-sunset.has-wallpaper .day-tile.active .day-tile-label {
+  color: var(--text);
+}
+
+.theme-sunset.has-wallpaper .day-tile.active.completed {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 50%, transparent);
+}
+
+.theme-sunset.has-wallpaper .day-tile.completed {
+  border-color: #e05555;
+  border-width: 3px;
+}
+
+.theme-sunset.has-wallpaper .exercise-card {
+  background: rgba(30, 14, 12, 0.48);
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+}
+
+.theme-sunset.has-wallpaper .settings-section {
+  background: rgba(30, 14, 12, 0.48);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+.theme-sunset.has-wallpaper .settings-action-btn {
+  background: rgba(32, 14, 12, 0.42);
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.theme-sunset.has-wallpaper .theme-btn {
+  background: rgba(32, 14, 12, 0.38);
+}
+
+.theme-sunset.has-wallpaper .ex-edit-form {
+  background: rgba(32, 14, 12, 0.52);
+}
+
+.theme-sunset.has-wallpaper .ex-history {
+  background: rgba(22, 10, 10, 0.48);
+}
+
+.theme-sunset.has-wallpaper .input-stepper {
+  background: rgba(32, 14, 12, 0.42);
+}
+
+.theme-sunset.has-wallpaper .ex-note {
+  background: rgba(32, 14, 12, 0.42);
+}
+
+.theme-sunset.has-wallpaper .toggle-btn {
+  background: rgba(32, 14, 12, 0.38);
+}
+
+.theme-sunset.has-wallpaper .ex-last {
+  background: rgba(32, 14, 12, 0.38);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-sunset.has-wallpaper .add-ex-btn {
+  background: rgba(32, 14, 12, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-sunset.has-wallpaper .cycle-btn {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  color: var(--text);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+.theme-sunset.has-wallpaper .modal {
+  background: rgba(20, 10, 10, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.theme-sunset.has-wallpaper .wp-opacity-row {
+  background: rgba(32, 14, 12, 0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ════════════════════════════════════════════
    ТЕМА НЕОН (neon) — адаптация под обои
    background: rgba(30, 16, 48, 0.45) для плиток
    ════════════════════════════════════════════ */

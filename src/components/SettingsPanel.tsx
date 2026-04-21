@@ -53,7 +53,7 @@ export default function SettingsPanel({
           </button>
         </div>
         <div className="theme-grid">
-          {(['neon', 'moss', 'midnight', 'ice', 'deep', 'steel', 'wine', 'smoke'] as ThemeName[]).map((tKey) => (
+          {(['neon', 'moss', 'sunset'] as ThemeName[]).map((tKey) => (
             <button
               key={tKey}
               className={`theme-btn ${theme === tKey ? 'active' : ''}`}

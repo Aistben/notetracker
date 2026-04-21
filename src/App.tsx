@@ -42,13 +42,8 @@ export default function App() {
   // Маппинг тем → обоев
   const THEME_WALLPAPERS: Record<ThemeName, string | null> = {
     neon: '/wallpaper/neon-bg.png',
-    midnight: null,
-    ice: null,
-    deep: null,
-    steel: null,
     moss: '/wallpaper/cosmos-bg.jpg',
-    wine: null,
-    smoke: null
+    sunset: '/wallpaper/none-bg.jpg'
   }
 
   // Автоматическая смена обоев при смене темы (если пользователь не загрузил свои)

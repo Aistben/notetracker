@@ -228,6 +228,23 @@
 .cycle-btn:hover { transform: translateY(-1px); }
 .cycle-btn:active { transform: translateY(1px); }
 
+.theme-sunset .finish-btn {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: #fff1e7;
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 32%, transparent);
+}
+
+.theme-sunset .finish-btn:hover {
+  box-shadow: 0 6px 22px color-mix(in srgb, var(--primary) 40%, transparent);
+}
+
+.theme-sunset .cycle-btn {
+  background: linear-gradient(135deg, #8f2f14, var(--primary));
+  color: #fff1e7;
+  border: 1px solid color-mix(in srgb, var(--primary) 50%, transparent);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -310,6 +327,16 @@
   color: #28a05a; 
   line-height: 1; 
   margin-top: -4px; 
+}
+
+.theme-sunset .finish-circle-green {
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
+  border-color: var(--primary);
+  box-shadow: 0 0 48px color-mix(in srgb, var(--primary) 45%, transparent);
+}
+
+.theme-sunset .finish-check-mark {
+  color: var(--primary);
 }
 
 
