@@ -1,4 +1,4 @@
-.exercises-list { display: flex; flex-direction: column; gap: 10px; }
+.exercises-list { display: flex; flex-direction: column; gap: 10px; overflow-x: auto; }
 .exercises-list .exercise-card:last-child { margin-bottom: 48px; }
 
 .exercise-card {

@@ -107,14 +107,9 @@
 }
 
 .main { flex: 1; padding: 20px 10px;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   display: flex;
   flex-direction: column;
 }
-
-.main::-webkit-scrollbar { display: none; }
 
 .main.settings-active {
   overflow-y: hidden;
