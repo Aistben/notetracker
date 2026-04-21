@@ -196,5 +196,22 @@
 .modal-btn.confirm:hover { background: #a02828; }
 .modal-btn.cycle { background: linear-gradient(135deg, #0a4a28, #2a8a50); color: #c8ecd8; }
 .modal-btn.cycle:hover { background: linear-gradient(135deg, #0c5a30, #38a060); }
+
+.theme-sunset .modal-btn.cycle {
+  background: linear-gradient(135deg, #8f2f14, var(--primary));
+  color: #fff1e7;
+}
+.theme-sunset .modal-btn.cycle:hover {
+  background: linear-gradient(135deg, #a03818, color-mix(in srgb, var(--primary) 88%, #fff1e7));
+}
+
+.theme-more .modal-btn.cycle {
+  background: linear-gradient(135deg, #4a5a6e, var(--primary));
+  color: #dce4ee;
+}
+.theme-more .modal-btn.cycle:hover {
+  background: linear-gradient(135deg, #566880, color-mix(in srgb, var(--primary) 85%, #dce4ee));
+}
+
 .modal-btn.primary-btn { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: var(--bg); }
 .modal-btn.primary-btn:hover { opacity: 0.9; }

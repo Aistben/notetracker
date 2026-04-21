@@ -41,9 +41,10 @@ export default function App() {
 
   // Маппинг тем → обоев
   const THEME_WALLPAPERS: Record<ThemeName, string | null> = {
-    neon: '/wallpaper/neon-bg.png',
-    moss: '/wallpaper/cosmos-bg.jpg',
-    sunset: '/wallpaper/none-bg.jpg'
+    neon: '/wallpaper/neon-bg.png', // Неон
+    moss: '/wallpaper/cosmos-bg.jpg', // Космос
+    sunset: null,
+    more: '/wallpaper/more-bg.jpg' // More
   }
 
   // Автоматическая смена обоев при смене темы (если пользователь не загрузил свои)
@@ -382,7 +383,7 @@ export default function App() {
   }}
   initialSlide={activeDay}
   speed={400}
-  style={{ width: '100%', height: 'auto', minHeight: '300px' }}
+  style={{ width: '100%', height: 'calc(100vh - 240px)', minHeight: '300px' }}
 >
   {days.map((day) => (
     <SwiperSlide key={day.key}>
@@ -423,32 +424,6 @@ export default function App() {
     </SwiperSlide>
   ))}
 </Swiper>
-
-          {/* Фиксированный футер вне Swiper */}
-          {tab === 'tracker' && (
-            <div className="fixed-footer">
-              {finishError && (
-                <div className="finish-error">⚠️ Введите данные хотя бы в одном упражнении</div>
-              )}
-
-              <div className="footer-buttons">
-                {allDaysCompleted ? (
-                  <button className="cycle-btn" onClick={() => setCycleModal(true)} style={{ flex: 1, margin: 0 }}>🔁 Следующий цикл</button>
-                ) : (
-                  <>
-                    <button
-                      className={`finish-btn ${isDayCompleted(days[activeDay]?.key) ? 'finished' : ''} ${finishError ? 'error-shake' : ''}`}
-                      onClick={finishWorkoutWrapper}
-                      disabled={isDayCompleted(days[activeDay]?.key)}
-                    >
-                      {isDayCompleted(days[activeDay]?.key) ? 'Тренировка завершена' : '🏁 Завершить тренировку'}
-                    </button>
-                    <button className="settings-btn" onClick={() => setTab('settings')}>⚙️</button>
-                  </>
-                )}
-              </div>
-            </div>
-          )}
             </>
           )}
 
@@ -471,6 +446,32 @@ export default function App() {
             />
           )}
         </main>
+
+        {/* Фиксированный футер вне main */}
+        {tab === 'tracker' && (
+          <div className="fixed-footer">
+            {finishError && (
+              <div className="finish-error">⚠️ Введите данные хотя бы в одном упражнении</div>
+            )}
+
+            <div className="footer-buttons">
+              {allDaysCompleted ? (
+                <button className="cycle-btn" onClick={() => setCycleModal(true)} style={{ flex: 1, margin: 0 }}>🔁 Следующий цикл</button>
+              ) : (
+                <>
+                  <button
+                    className={`finish-btn ${isDayCompleted(days[activeDay]?.key) ? 'finished' : ''} ${finishError ? 'error-shake' : ''}`}
+                    onClick={finishWorkoutWrapper}
+                    disabled={isDayCompleted(days[activeDay]?.key)}
+                  >
+                    {isDayCompleted(days[activeDay]?.key) ? 'Тренировка завершена' : '🏁 Завершить тренировку'}
+                  </button>
+                  <button className="settings-btn" onClick={() => setTab('settings')}>⚙️</button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         {showFinishAnim && (
           <div className="finish-overlay">

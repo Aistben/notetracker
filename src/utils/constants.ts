@@ -1,6 +1,6 @@
 export type ExerciseType = 'основа' | 'подсобка'
 export type Intensity = 'тяжёлая' | 'средняя' | 'лёгкая'
-export type ThemeName = 'neon' | 'moss' | 'sunset'
+export type ThemeName = 'neon' | 'moss' | 'sunset' | 'more'
 export type TabName = 'tracker' | 'settings'
 
 export interface Exercise {
@@ -92,5 +92,11 @@ export const THEMES: Record<ThemeName, ThemeConfig> = {
     primary: '#ff7a3c', primaryDark: '#e65f26', text: '#ffe9dc', textSec: '#c8a894',
     accent: '#ffb26b', border: '#3a2018', cardBg: '#1b1015', inputBg: '#27161d',
     shadow: 'rgba(255,122,60,0.22)'
+  },
+  more: {
+    name: 'More', bg: '#06080d', surface: '#0a0e14', surfaceAlt: '#0f141c',
+    primary: '#7a8fa8', primaryDark: '#566a82', text: '#d8e0ec', textSec: '#728296',
+    accent: '#94a8c0', border: '#151c26', cardBg: '#0d121a', inputBg: '#111821',
+    shadow: 'rgba(122,143,168,0.14)'
   }
 }
