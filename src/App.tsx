@@ -43,7 +43,7 @@ export default function App() {
   const THEME_WALLPAPERS: Record<ThemeName, string | null> = {
     neon: '/wallpaper/neon-bg.png', // Неон
     moss: '/wallpaper/cosmos-bg.jpg', // Космос
-    sunset: null,
+    sunset: '/wallpaper/none-bg.jpg', // Закат
     more: '/wallpaper/more-bg.jpg' // More
   }
 
@@ -413,10 +413,14 @@ export default function App() {
   }}
   initialSlide={activeDay}
   speed={400}
+  resistance={false}
   resistanceRatio={0}
   touchReleaseOnEdges={false}
+  rewind={false}
+  shortSwipes={true}
+  longSwipes={true}
   allowTouchMove={days.length > 1}
-  style={{ width: '100%', height: 'calc(100vh - 240px)', minHeight: '300px' }}
+  style={{ width: '100%', minHeight: '300px' }}
 >
   {days.map((day) => (
     <SwiperSlide key={day.key}>

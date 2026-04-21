@@ -378,7 +378,7 @@
   flex: 1;
   min-height: 0;
   touch-action: pan-y pinch-zoom;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .swiper-slide {
