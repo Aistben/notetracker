@@ -94,9 +94,9 @@ export const THEMES: Record<ThemeName, ThemeConfig> = {
     shadow: 'rgba(255,122,60,0.22)'
   },
   more: {
-    name: 'More', bg: '#06080d', surface: '#0a0e14', surfaceAlt: '#0f141c',
-    primary: '#7a8fa8', primaryDark: '#566a82', text: '#d8e0ec', textSec: '#728296',
-    accent: '#94a8c0', border: '#151c26', cardBg: '#0d121a', inputBg: '#111821',
-    shadow: 'rgba(122,143,168,0.14)'
+    name: 'Море', bg: '#061629', surface: '#0d2342', surfaceAlt: '#153359',
+    primary: '#2aa8ff', primaryDark: '#1b79d6', text: '#f4faff', textSec: '#c7dcf7',
+    accent: '#7fd0ff', border: '#31527c', cardBg: '#112b4c', inputBg: '#173860',
+    shadow: 'rgba(42,168,255,0.35)'
   }
 }

@@ -624,16 +624,16 @@ button { cursor: pointer; border: none; background: none; }
    ════════════════════════════════════════════ */
 
 .theme-more.has-wallpaper .day-tile {
-  background: rgba(13, 18, 28, 0.48);
-  border: 2px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  background: rgba(30, 16, 48, 0.45);
+  border: 2px solid color-mix(in srgb, var(--primary) 50%, transparent);
 }
 
 .theme-more.has-wallpaper .day-tile:active { transform: scale(0.96); }
 
 .theme-more.has-wallpaper .day-tile.active {
   border-color: var(--primary);
-  background: rgba(15, 22, 35, 0.65);
-  box-shadow: 0 0 16px var(--shadow);
+  background: rgba(30, 16, 48, 0.45);
+  box-shadow: 0 0 20px var(--shadow);
 }
 
 .theme-more.has-wallpaper .day-tile.active.completed {
@@ -659,52 +659,51 @@ button { cursor: pointer; border: none; background: none; }
 }
 
 .theme-more.has-wallpaper .exercise-card {
-  background: rgba(13, 18, 28, 0.45);
-  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+  background: rgba(30, 16, 48, 0.45);
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
 }
 
 .theme-more.has-wallpaper .settings-section {
-  background: rgba(13, 18, 28, 0.45);
-  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 44%, transparent);
 }
 
 .theme-more.has-wallpaper .settings-action-btn {
-  background: rgba(11, 16, 24, 0.42);
-  border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
+  background: rgba(30, 16, 48, 0.45);
+  border: 1px solid color-mix(in srgb, var(--primary) 36%, transparent);
 }
 
 .theme-more.has-wallpaper .theme-btn {
-  background: rgba(11, 16, 24, 0.38);
+  background: rgba(30, 16, 48, 0.45);
 }
 
 .theme-more.has-wallpaper .ex-edit-form {
-  background: rgba(11, 16, 24, 0.52);
+  background: rgba(30, 16, 48, 0.45);
 }
 
 .theme-more.has-wallpaper .ex-history {
-  background: rgba(10, 14, 22, 0.48);
+  background: rgba(30, 16, 48, 0.45);
 }
 
 .theme-more.has-wallpaper .input-stepper {
-  background: rgba(11, 16, 24, 0.42);
+  background: rgba(30, 16, 48, 0.45);
 }
 
 .theme-more.has-wallpaper .ex-note {
-  background: rgba(11, 16, 24, 0.42);
+  background: rgba(30, 16, 48, 0.45);
 }
 
 .theme-more.has-wallpaper .toggle-btn {
-  background: rgba(11, 16, 24, 0.38);
+  background: rgba(30, 16, 48, 0.45);
 }
 
 .theme-more.has-wallpaper .ex-last {
-  background: rgba(11, 16, 24, 0.38);
+  background: rgba(30, 16, 48, 0.45);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
 .theme-more.has-wallpaper .add-ex-btn {
-  background: rgba(11, 16, 24, 0.3);
+  background: rgba(30, 16, 48, 0.45);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -712,20 +711,20 @@ button { cursor: pointer; border: none; background: none; }
 .theme-more.has-wallpaper .cycle-btn {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 60%, transparent);
   color: var(--text);
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 25%, transparent);
+  box-shadow: 0 4px 22px color-mix(in srgb, var(--primary) 50%, transparent);
 }
 
 .theme-more.has-wallpaper .modal {
-  background: rgba(12, 16, 26, 0.86);
+  background: rgba(8, 26, 49, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 54%, transparent);
 }
 
 .theme-more.has-wallpaper .wp-opacity-row {
-  background: rgba(11, 16, 24, 0.42);
+  background: rgba(30, 16, 48, 0.45);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }

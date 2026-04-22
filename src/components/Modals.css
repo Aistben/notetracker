@@ -206,11 +206,15 @@
 }
 
 .theme-more .modal-btn.cycle {
-  background: linear-gradient(135deg, #4a5a6e, var(--primary));
-  color: #dce4ee;
+  background: linear-gradient(345deg, #55d6ff99, var(--primary));
+  color: #f7fcff;
 }
 .theme-more .modal-btn.cycle:hover {
-  background: linear-gradient(135deg, #566880, color-mix(in srgb, var(--primary) 85%, #dce4ee));
+  background: linear-gradient(345deg, #7de3ffb0, color-mix(in srgb, var(--primary) 88%, #f7fcff));
+}
+
+.theme-more .modal-btn.primary-btn {
+  color: #f7fcff;
 }
 
 .modal-btn.primary-btn { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: var(--bg); }

@@ -43,7 +43,7 @@ export default function App() {
   const THEME_WALLPAPERS: Record<ThemeName, string | null> = {
     neon: '/wallpaper/neon-bg.png', // Неон
     moss: '/wallpaper/cosmos-bg.jpg', // Космос
-    sunset: '/wallpaper/none-bg.jpg', // Закат
+    sunset: '/wallpaper/zakat.jpg', // Закат
     more: '/wallpaper/more-bg.jpg' // More
   }
 
