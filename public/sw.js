@@ -4,7 +4,8 @@ const CACHE_NAME = 'notetracker-cache-v1'
 const PRECACHE_URLS = [
   '/',
   '/index.html',
-  '/manifest.webmanifest',
+  '/manifest.json',
+  '/icons/icon-logo.png',
 ]
 
 self.addEventListener('install', (event) => {
@@ -57,4 +58,3 @@ self.addEventListener('fetch', (event) => {
     })
   )
 })
-
