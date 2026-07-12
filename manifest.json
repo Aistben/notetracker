@@ -1,0 +1,11 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "notetracker-cyan.vercel",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "notetracker-cyan.vercel",
+  "start_url": "/",
+  "theme_color": "#ffffff"
+}
